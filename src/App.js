@@ -1,8 +1,9 @@
 import './App.css';
 import { Formik, Field } from 'formik';
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, setDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore' 
+import { getFirestore, collection, getDocs, setDoc, query, orderBy, deleteDoc, doc } from 'firebase/firestore' 
 import { useEffect, useState } from 'react';
+import { generateUniqSerial, formatDate } from './utils/utils';
 import { Item } from './components/Items/Items';
 
 const firebaseConfig = {
@@ -28,38 +29,20 @@ function App() {
   }, []);
 
 
-  const handleEdit = async (id) => {
-    const tomasRef = doc(db, "tomas-v1", id);
-    await updateDoc(tomasRef, {
-      time: "12:12"
-    });
-    getTomas(db).then(data => setTomas(data));
-  }
-
+  /**
+   *  Eliminate toma
+   * @param {*} id 
+   */
   const handleDelete = async (id) => {
     await deleteDoc(doc(db, "tomas-v1", id));
     getTomas(db).then(data => setTomas(data));
   }
 
-  const generateUniqSerial = () => {  
-    return 'xxxx-xxxx-xxx-xxxx'.replace(/[x]/g, (c) => {  
-        const r = Math.floor(Math.random() * 16);  
-        return r.toString(16);  
-  });  
-}
-
-
-const formatDate = (date) => {
-  if(!date) return null;
-
-  const array = date.split('-');
-  const formatted = array[2] + '/' + array[1]+ '/' + array[0];
-  return formatted;
-}
-
-  // Set Document
-const writeTomaData = async ({date, time, tit, action}) => {
-  
+  /**
+   * Set doc
+   * @param {*} param0 
+   */
+  const writeTomaData = async ({date, time, tit, action}) => {
     const id = generateUniqSerial();
     await setDoc(doc(db, "tomas-v1", id), {
       id, 
@@ -71,19 +54,19 @@ const writeTomaData = async ({date, time, tit, action}) => {
     getTomas(db).then(data => setTomas(data));
   }
 
-  // Get All Documents
+  /**
+   * Get All Documents order by date and time
+   * @param {*} db 
+   * @returns 
+   */
   const getTomas = async (db) => {
     const tomasCol = collection(db, 'tomas-v1/');
-    const tomaSnapshot = await getDocs(tomasCol);
+    const q = query(tomasCol, orderBy("date", "desc"), orderBy("time", "desc"));
+    const tomaSnapshot = await getDocs(q);
     const tomaList = tomaSnapshot.docs.map(doc => doc.data());
     return tomaList;
   }
-
-  const updateDocument = async (date, time, tit, action, id) => {
-
-    console.log(time)
-  }
-
+  
 
   return (
     <div>
@@ -106,9 +89,10 @@ const writeTomaData = async ({date, time, tit, action}) => {
             }
             return errors;
           }}
-          onSubmit={(values, { setSubmitting }) => {
+          onSubmit={(values, { setSubmitting, resetForm }) => {
             writeTomaData(values);
             setSubmitting(false);
+            resetForm();
           }}
      >
        {({
@@ -187,7 +171,6 @@ const writeTomaData = async ({date, time, tit, action}) => {
                   <Item 
                     key={index} 
                     toma={toma} 
-                    handleEdit={updateDocument} 
                     handleDelete={handleDelete} 
                   />
                 )

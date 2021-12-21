@@ -4,11 +4,10 @@ import './item.css';
 
 export const Item = (props) => {
 
-    const iconEdit = <FontAwesomeIcon icon={faEdit} />
     const iconDelete = <FontAwesomeIcon icon={faTrash} />
 
     const { date, time, tit, action, id } = props.toma
-    const { handleEdit, handleDelete } = props
+    const { handleDelete } = props
     return (
         <>
             <thead>
@@ -17,7 +16,6 @@ export const Item = (props) => {
                     <th>Hora</th>
                     <th>Teta</th>
                     <th>Acción</th>
-                    <th>Editar</th>
                     <th>Borrar</th>
                 </tr>
             </thead>
@@ -27,7 +25,6 @@ export const Item = (props) => {
                     <td>{ time }</td>
                     <td>{ tit }</td>
                     <td>{ action }</td>
-                    <td><button onClick={ () => handleEdit(date, time, tit, action, id) }>{ iconEdit }</button></td>
                     <td><button onClick={ () => handleDelete(id) }>{ iconDelete }</button></td>
                 </tr>
             </tbody>
