@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
-import './item.css';
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+// import './item.css';
+import '../Table/table.css';
 
 export const Item = (props) => {
 
@@ -12,20 +13,20 @@ export const Item = (props) => {
         <>
             <thead>
                 <tr>
-                    <th>Fecha</th>
-                    <th>Hora</th>
-                    <th>Teta</th>
-                    <th>Acción</th>
-                    <th>Borrar</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Hora</th>
+                    <th scope="col">Teta</th>
+                    <th scope="col">Acción</th>
+                    <th scope="col">Borrar</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>{ date }</td>
-                    <td>{ time }</td>
-                    <td>{ tit }</td>
-                    <td>{ action }</td>
-                    <td><button onClick={ () => handleDelete(id) }>{ iconDelete }</button></td>
+                    <td data-label="Fecha">{ date }</td>
+                    <td data-label="Hora">{ time }</td>
+                    <td data-label="Teta">{ tit }</td>
+                    <td data-label="Acción">{ action }</td>
+                    <td data-label="Borrar"><button onClick={ () => handleDelete(id) }>{ iconDelete }</button></td>
                 </tr>
             </tbody>
         </>

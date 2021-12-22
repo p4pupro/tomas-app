@@ -7,7 +7,6 @@ export const generateUniqSerial = () => {
 }
 
 
-
 export const formatDate = (date) => {
     if(!date) return null;
   
