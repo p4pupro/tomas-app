@@ -3,7 +3,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 // import './item.css';
 import '../Table/table.css';
 
-export const Item = (props) => {
+export const Items = (props) => {
 
     const iconDelete = <FontAwesomeIcon icon={faTrash} />
 

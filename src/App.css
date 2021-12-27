@@ -71,6 +71,7 @@ html {
 
 /* CSS */
 .button-register {
+  width: 100%;
   background-color: #9933cc;
   border-radius: 8px;
   border-style: none;
@@ -102,27 +103,77 @@ html {
   margin: 10px;
 }
 
+#radio-tit {
+  margin-top: 20px;
+}
+
 .button-register:hover,
 .button-register:focus {
   background-color: #9933cc;
 }
 
+
 input[type="radio"] {
-  /* ...existing styles */
  padding: 30px;
  justify-content: space-between;
+ transition: all 0.15s ease-out 0s;
+ background: white;
+ border: none;
+ cursor: pointer;
+ margin: 20px;
+ border-radius: 50%;
+ transform: scale(2);
 }
 
 input[type="radio"]::before {
-  content: "";
+  color: rebeccapurple;
   width: 0.65em;
   height: 0.65em;
   border-radius: 50%;
-  transform: scale(0);
+  margin: 40px;
+  transform: scale(2);
   transition: 120ms transform ease-in-out;
   box-shadow: inset 1em 1em var(--form-control-color);
 }
 
 input[type="radio"]:checked::before {
-  transform: scale(1);
+  transform: scale(2);
 }
+
+
+.inputs {
+  text-align: left;
+  margin-top: 30px;
+}
+
+.date .time, input[type="date"], [type="time"] {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.date .time {
+  margin-bottom: 4px;
+}
+
+
+input::placeholder {
+  color: gray;
+}
+
+input[type="date"], [type="time"] {
+  background: #ecf0f3;
+  padding: 10px;
+  padding-left: 20px;
+  height: 50px;
+  font-size: 14px;
+  border-radius: 50px;
+  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+}
+
+
+
+

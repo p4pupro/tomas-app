@@ -18,16 +18,17 @@ const firebaseConfig = {
   appId: "1:81567280190:web:a71917fb1556d508d3b56f"
 };
 
+
 function App() {
 
-    // Initialize Firebase
+  // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
   const [tomas, setTomas] = useState(null);
 
   useEffect(() => {
-   getTomas(db).then(data => setTomas(data));
+    getTomas(db).then(data => setTomas(data));
   }, []);
 
 
@@ -46,10 +47,11 @@ function App() {
    */
   const writeTomaData = async ({date, time, tit, action}) => {
     const id = generateUniqSerial();
+    console.log(time)
     await setDoc(doc(db, "tomas-v1", id), {
       id, 
       date: formatDate(date) || new Date().toLocaleDateString("es-ES"), 
-      time: time || new Date().toLocaleTimeString(), 
+      time:  time ? time + ':25' : new Date().toLocaleTimeString(), 
       tit, 
       action
     });
@@ -71,7 +73,7 @@ function App() {
   
 
   return (
-    <div>
+    <>
       <Header />
     <div className="row">
       <div className="col-12 col-s-12">
@@ -105,50 +107,55 @@ function App() {
           isSubmitting
         }) => (
           <form onSubmit={handleSubmit}>
-            <input
-              type="date"
-              name="date"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.date}
-              errors={errors}
-            />
-            {errors.date && touched.date && (
-                <span className="error">{errors.date}</span>
-              )}
-            <input
-              type="time"
-              name="time"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.time}
-              errors={errors}
-            />
-              {errors.time && touched.time && (
-                <span className="error">{errors.time}</span>
-              )}
+            <div className="inputs">
+              <label className="date">Fecha</label>
+              <input
+                type="date"
+                name="date"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.date}
+                errors={errors}
+              />
+              {errors.date && touched.date && (
+                  <span className="error">{errors.date}</span>
+                )}
+              <label className="time">Hora</label>
+              <input
+                type="time"
+                name="time"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.time}
+                errors={errors}
+              />
+                {errors.time && touched.time && (
+                  <span className="error">{errors.time}</span>
+                )}
+
+            </div>
             <div id="radio-tit">Teta</div>
             <div className="radio-buttons" role="group" aria-labelledby="radio-tit">
               <label>
-                <Field type="radio" name="tit" value="izquierda" />
+                <Field type="radio" name="tit" value="izquierda" className="option-input-radio" />
                   Izquierda
               </label>
               <label>
-                <Field type="radio" name="tit" value="derecha" />
+                <Field type="radio" name="tit" value="derecha" className="option-input-radio"  />
                   Derecha
               </label>
               </div>
               {errors.tit && (
                 <span className="error">{errors.tit}</span>
               )}
-            <div id="radio-start-stop">Acción</div>
-            <div className="radio-buttons" role="group" aria-labelledby="radio-start-stop">
+            <div id="radio-action">Acción</div>
+            <div className="radio-buttons" role="group" aria-labelledby="radio-action">
               <label>
-                <Field type="radio" name="action" value="empieza" />
+                <Field type="radio" name="action" value="empieza" className="option-input-radio" />
                   Empieza
               </label>
               <label>
-                <Field type="radio" name="action" value="termina" />
+                <Field type="radio" name="action" value="termina" className="option-input-radio"/>
                   Termina
               </label>
               </div>
@@ -168,7 +175,7 @@ function App() {
       </div>
     </div>
       
-  </div>
+  </>
   );
 }
 

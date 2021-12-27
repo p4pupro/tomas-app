@@ -1,4 +1,4 @@
-import { Item } from '../Items/Items';
+import { Items } from '../Items/Items';
 import './table.css';
 
 export const Table = (props) => {
@@ -12,7 +12,7 @@ export const Table = (props) => {
             {
               tomas ? tomas.map((toma, index) => {
                 return (
-                  <Item 
+                  <Items
                     key={index} 
                     toma={toma} 
                     handleDelete={handleDelete} 
