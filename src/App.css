@@ -101,6 +101,7 @@ html {
 
 .radio-buttons {
   margin: 10px;
+  display: inline-block;
 }
 
 #radio-tit {
@@ -174,6 +175,10 @@ input[type="date"], [type="time"] {
   box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
 }
 
+
+label {
+  display: inline-block;
+}
 
 
 
