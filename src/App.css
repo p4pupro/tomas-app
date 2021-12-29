@@ -36,7 +36,7 @@ html {
   width: 100%;
 } */
 
-@media only screen and (min-width: 220px) {
+@media only screen and (max-width: 150px) {
   .col-xs-1 {width: 8.33%;}
   .col-xs-2 {width: 16.66%;}
   .col-xs-3 {width: 25%;}
