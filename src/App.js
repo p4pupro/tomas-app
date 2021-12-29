@@ -135,30 +135,34 @@ function App() {
 
             </div>
             
-            <div className="col-12 col-xs-12" role="group" aria-labelledby="radio-tit">
-              <div id="radio-tit">Teta</div>
-              <label>
-                <Field type="radio" name="tit" value="izquierda" className="option-input-radio" />
-                Izquierda
+            <div className="col-s-12 col-xs-12" role="group" aria-labelledby="radio-tit">
+            <div id="radio-tit">Teta</div>      
+              <label for="tit" className='col-xs-12 col-s-6'>
+              Izquierda 
+              <Field type="radio" name="tit" value="izquierda" className="col-xs-12 col-s-6" />
+             
               </label>
-              <label>  
-                <Field type="radio" name="tit" value="derecha" className="option-input-radio"  /> 
-                Derecha
-              </label>
-              </div>
+              <label for="tit" className='col-xs-12 col-s-6'>
+              Derecha 
+              <Field type="radio" name="tit" value="derecha" className="col-xs-12 col-s-6"  /> 
+             </label>
+            </div>
               {errors.tit && (
                 <span className="error">{errors.tit}</span>
               )}
             
-            <div className="col-12 col-xs-12" role="group" aria-labelledby="radio-action">
+            
+            <div className="col-s-12 col-xs-12" role="group" aria-labelledby="radio-action">
             <div id="radio-action">Acción</div>
-              <label>
-                <Field type="radio" name="action" value="empieza" className="option-input-radio" />
-                  Empieza
+              <label for="action" className='col-xs-12 col-s-6'>
+              Empieza
+                <Field type="radio" name="action" value="empieza" className="col-xs-12 col-s-6" />
+                  
               </label>
-              <label>
-                <Field type="radio" name="action" value="termina" className="option-input-radio"/>
-                  Termina
+              <label for="action" className='col-xs-12 col-s-6 '>
+              Termina
+                <Field type="radio" name="action" value="termina" className="col-xs-12 col-s-6 "/>
+                  
               </label>
               </div>
               {errors.action && (
