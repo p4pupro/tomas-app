@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/tomas-app/static/css/main.80362792.css",
-    "main.js": "/tomas-app/static/js/main.d4c56e32.js",
+    "main.css": "/tomas-app/static/css/main.d25c7f87.css",
+    "main.js": "/tomas-app/static/js/main.c34c0854.js",
     "static/js/787.f0c70ff2.chunk.js": "/tomas-app/static/js/787.f0c70ff2.chunk.js",
     "service-worker.js": "/tomas-app/service-worker.js",
     "index.html": "/tomas-app/index.html",
-    "main.80362792.css.map": "/tomas-app/static/css/main.80362792.css.map",
-    "main.d4c56e32.js.map": "/tomas-app/static/js/main.d4c56e32.js.map",
+    "main.d25c7f87.css.map": "/tomas-app/static/css/main.d25c7f87.css.map",
+    "main.c34c0854.js.map": "/tomas-app/static/js/main.c34c0854.js.map",
     "787.f0c70ff2.chunk.js.map": "/tomas-app/static/js/787.f0c70ff2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.80362792.css",
-    "static/js/main.d4c56e32.js"
+    "static/css/main.d25c7f87.css",
+    "static/js/main.c34c0854.js"
   ]
 }
