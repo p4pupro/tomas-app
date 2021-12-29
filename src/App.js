@@ -138,11 +138,11 @@ function App() {
             <div className="radio-buttons" role="group" aria-labelledby="radio-tit">
               <label>
                 <Field type="radio" name="tit" value="izquierda" className="option-input-radio" />
-                  Izquierda
+                Izquierda
               </label>
-              <label>
-                <Field type="radio" name="tit" value="derecha" className="option-input-radio"  />
-                  Derecha
+              <label>  
+                <Field type="radio" name="tit" value="derecha" className="option-input-radio"  /> 
+                Derecha
               </label>
               </div>
               {errors.tit && (
