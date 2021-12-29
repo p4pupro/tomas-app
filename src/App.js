@@ -134,8 +134,9 @@ function App() {
                 )}
 
             </div>
-            <div id="radio-tit">Teta</div>
-            <div className="radio-buttons" role="group" aria-labelledby="radio-tit">
+            
+            <div className="col-12 col-xs-12" role="group" aria-labelledby="radio-tit">
+              <div id="radio-tit">Teta</div>
               <label>
                 <Field type="radio" name="tit" value="izquierda" className="option-input-radio" />
                 Izquierda
@@ -148,8 +149,9 @@ function App() {
               {errors.tit && (
                 <span className="error">{errors.tit}</span>
               )}
+            
+            <div className="col-12 col-xs-12" role="group" aria-labelledby="radio-action">
             <div id="radio-action">Acción</div>
-            <div className="radio-buttons" role="group" aria-labelledby="radio-action">
               <label>
                 <Field type="radio" name="action" value="empieza" className="option-input-radio" />
                   Empieza
