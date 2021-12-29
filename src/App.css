@@ -36,7 +36,7 @@ html {
   width: 100%;
 } */
 
-@media only screen and (max-width: 319px) {
+@media only screen and (min-width: 220px) {
   .col-xs-1 {width: 8.33%;}
   .col-xs-2 {width: 16.66%;}
   .col-xs-3 {width: 25%;}
@@ -184,6 +184,11 @@ input[type="date"], [type="time"] {
   box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
 }
 
+
+label {
+  width: 50%;
+  text-align: justify;
+}
 
 
 

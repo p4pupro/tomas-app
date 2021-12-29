@@ -139,12 +139,12 @@ function App() {
             <div id="radio-tit">Teta</div>      
               <label for="tit" className='col-xs-12 col-s-6'>
               Izquierda 
-              <Field type="radio" name="tit" value="izquierda" className="col-xs-12 col-s-6" />
+              <Field type="radio" name="tit" value="izquierda" className="col-xs-6 col-s-6" />
              
               </label>
               <label for="tit" className='col-xs-12 col-s-6'>
               Derecha 
-              <Field type="radio" name="tit" value="derecha" className="col-xs-12 col-s-6"  /> 
+              <Field type="radio" name="tit" value="derecha" className="col-xs-6 col-s-6"  /> 
              </label>
             </div>
               {errors.tit && (
@@ -156,12 +156,12 @@ function App() {
             <div id="radio-action">Acción</div>
               <label for="action" className='col-xs-12 col-s-6'>
               Empieza
-                <Field type="radio" name="action" value="empieza" className="col-xs-12 col-s-6" />
+                <Field type="radio" name="action" value="empieza" className="col-xs-6 col-s-6" />
                   
               </label>
               <label for="action" className='col-xs-12 col-s-6 '>
               Termina
-                <Field type="radio" name="action" value="termina" className="col-xs-12 col-s-6 "/>
+                <Field type="radio" name="action" value="termina" className="col-xs-6 col-s-6 "/>
                   
               </label>
               </div>
