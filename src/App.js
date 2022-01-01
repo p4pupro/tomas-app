@@ -47,11 +47,17 @@ function App() {
    */
   const writeTomaData = async ({date, time, tit, action}) => {
     const id = generateUniqSerial();
-    console.log(time)
+    const dateFormated = formatDate(date);
+    const splited = dateFormated ? 
+      dateFormated.split('/') : 
+      new Date().toLocaleDateString("es-ES").split('/');
+    const timestamp = new Date(splited[2],splited[1],splited[0]).getTime();
+    
     await setDoc(doc(db, "tomas-v1", id), {
       id, 
-      date: formatDate(date) || new Date().toLocaleDateString("es-ES"), 
-      time:  time ? time + ':25' : new Date().toLocaleTimeString(), 
+      date: dateFormated || new Date().toLocaleDateString("es-ES"), 
+      time:  time ? time + ':25' : new Date().toLocaleTimeString(),
+      timestamp,
       tit, 
       action
     });
@@ -65,7 +71,7 @@ function App() {
    */
   const getTomas = async (db) => {
     const tomasCol = collection(db, 'tomas-v1/');
-    const q = query(tomasCol, orderBy("date", "desc"), orderBy("time", "desc"));
+    const q = query(tomasCol, orderBy("date", "desc"), orderBy("timestamp", "desc"));
     const tomaSnapshot = await getDocs(q);
     const tomaList = tomaSnapshot.docs.map(doc => doc.data());
     return tomaList;
@@ -137,12 +143,12 @@ function App() {
             
             <div className="col-s-12 col-xs-12" role="group" aria-labelledby="radio-tit">
             <div id="radio-tit">Teta</div>      
-              <label for="tit" className='col-xs-12 col-s-6'>
+              <label htmlFor="tit" className='col-xs-12 col-s-6'>
               Izquierda 
               <Field type="radio" name="tit" value="izquierda" className="col-xs-6 col-s-6" />
              
               </label>
-              <label for="tit" className='col-xs-12 col-s-6'>
+              <label htmlFor="tit" className='col-xs-12 col-s-6'>
               Derecha 
               <Field type="radio" name="tit" value="derecha" className="col-xs-6 col-s-6"  /> 
              </label>
@@ -154,12 +160,12 @@ function App() {
             
             <div className="col-s-12 col-xs-12" role="group" aria-labelledby="radio-action">
             <div id="radio-action">Acción</div>
-              <label for="action" className='col-xs-12 col-s-6'>
+              <label htmlFor="action" className='col-xs-12 col-s-6'>
               Empieza
                 <Field type="radio" name="action" value="empieza" className="col-xs-6 col-s-6" />
                   
               </label>
-              <label for="action" className='col-xs-12 col-s-6 '>
+              <label htmlFor="action" className='col-xs-12 col-s-6 '>
               Termina
                 <Field type="radio" name="action" value="termina" className="col-xs-6 col-s-6 "/>
                   
