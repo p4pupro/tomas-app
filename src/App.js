@@ -1,7 +1,7 @@
 import './App.css';
 import { Formik, Field } from 'formik';
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, setDoc, query, orderBy, deleteDoc, doc } from 'firebase/firestore' 
+import { getFirestore, collection, getDocs, setDoc, query, orderBy, deleteDoc, doc, Timestamp } from 'firebase/firestore' 
 import { useEffect, useState } from 'react';
 import { generateUniqSerial, formatDate } from './utils/utils';
 import { Footer } from './components/Footer/Footer';
@@ -26,10 +26,15 @@ function App() {
   const db = getFirestore(app);
 
   const [tomas, setTomas] = useState(null);
+  const [average, setAverage] = useState(null);
 
   useEffect(() => {
     getTomas(db).then(data => setTomas(data));
   }, []);
+
+  useEffect(() => {
+    averageTomas().then(data => setAverage(data));
+  }, [tomas]);
 
 
   /**
@@ -48,16 +53,11 @@ function App() {
   const writeTomaData = async ({date, time, tit, action}) => {
     const id = generateUniqSerial();
     const dateFormated = formatDate(date);
-    const splited = dateFormated ? 
-      dateFormated.split('/') : 
-      new Date().toLocaleDateString("es-ES").split('/');
-    const timestamp = new Date(splited[2],splited[1],splited[0]).getTime();
-    
     await setDoc(doc(db, "tomas-v1", id), {
       id, 
       date: dateFormated || new Date().toLocaleDateString("es-ES"), 
       time:  time ? time + ':25' : new Date().toLocaleTimeString(),
-      timestamp,
+      timestamp: Timestamp.now(),
       tit, 
       action
     });
@@ -75,6 +75,14 @@ function App() {
     const tomaSnapshot = await getDocs(q);
     const tomaList = tomaSnapshot.docs.map(doc => doc.data());
     return tomaList;
+  }
+
+
+  const averageTomas = async () => {
+    if(!tomas) return 0;
+    const tomasCount = tomas.length;
+    const tomasSum = tomas.reduce((acc, cur) => acc + Number(cur.action), 0);
+    return tomasSum / tomasCount;
   }
   
 
@@ -182,7 +190,7 @@ function App() {
       </Formik>
         </div>
 
-        <Table tomas={tomas} handleDelete={handleDelete} />
+        <Table tomas={tomas} average={average} handleDelete={handleDelete} />
         <Footer />
       </div>
     </div>

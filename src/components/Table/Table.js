@@ -3,7 +3,7 @@ import './table.css';
 
 export const Table = (props) => {
 
-    const { tomas, handleDelete } = props
+    const { tomas, average, handleDelete } = props
 
     return (
         <div className="wrap-table">
@@ -14,7 +14,8 @@ export const Table = (props) => {
                 return (
                   <Items
                     key={index} 
-                    toma={toma} 
+                    toma={toma}
+                    average={average}
                     handleDelete={handleDelete} 
                   />
                 )

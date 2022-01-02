@@ -13,4 +13,4 @@ export const formatDate = (date) => {
     const array = date.split('-');
     const formatted = array[2] + '/' + array[1]+ '/' + array[0];
     return formatted;
-  }
+}
