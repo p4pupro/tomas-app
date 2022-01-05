@@ -33,6 +33,7 @@ function App() {
   const [avgTits, setAvgTits] = useState(null);
   const [isTomaActive, setIsTomaActive] = useState(false);
   const [tomaId, setTomaId] = useState(null);
+  const [tomaTime, setTomaTime] = useState(null);
 
   useEffect(() => {
     getTomas(db).then(data => setTomas(data));
@@ -50,10 +51,10 @@ function App() {
     averageTits().then(avg => setAvgTits(avg));
   }, [isTomaActive]);
 
-  useEffect(() => {
-    if (isTomaActive) childRef.current.toggle();
-    if (!isTomaActive) childRef.current.reset();
-  }, [isTomaActive]);
+   useEffect(() => {
+     if (isTomaActive) setTomaTime(new Date().toLocaleTimeString());
+     if (!isTomaActive) setTomaTime(null);
+   }, [isTomaActive]);
 
 
   useEffect(() => {
@@ -190,7 +191,7 @@ function App() {
              </label>
 
             <div>
-              <Cronometer ref={childRef}/>
+              { tomaTime && (<span className='timer'>{ tomaTime }</span>) } 
             </div>
 
             <div className='col-xs-12 col-s-12'>

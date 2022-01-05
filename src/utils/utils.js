@@ -6,20 +6,10 @@ export const generateUniqSerial = () => {
   });  
 }
 
-
-export const formatDate = (date) => {
-    if(!date) return null;
-  
-    const array = date.split('-');
-    const formatted = array[2] + '/' + array[1]+ '/' + array[0];
-    return formatted;
-}
-
-
 export const opositeTit = (tit) => {
-    if(!tit) return;
-    const result = tit === 'izquierda' ? 'Derecha' : 'Izquierda';
-    return result;
+    if(tit === 'izquierda') return 'Derecha';
+    if(tit === 'derecha') return 'Izquierda';
+    if(!tit || tit !== 'izquierda' || tit !== 'derecha') return;  
 }
 
 export const capitalize = (text) => {
