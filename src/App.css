@@ -21,6 +21,11 @@ html {
   color: red;
 }
 
+.now {
+  color: #9933cc;
+}
+
+
 .aside {
   background-color: #33b5e5;
   padding: 15px;
@@ -31,10 +36,7 @@ html {
 }
 
 
-/* For mobile phones: */
-/* [class*="col-"] {
-  width: 100%;
-} */
+
 
 @media only screen and (max-width: 150px) {
   .col-xs-1 {width: 8.33%;}

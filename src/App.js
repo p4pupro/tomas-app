@@ -1,12 +1,13 @@
 import './App.css';
 import { Formik, Field } from 'formik';
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, setDoc, query, orderBy, deleteDoc, doc, Timestamp } from 'firebase/firestore' 
-import { useEffect, useState } from 'react';
-import { generateUniqSerial, formatDate } from './utils/utils';
+import { getFirestore, collection, getDocs, setDoc, query, orderBy, deleteDoc, doc, Timestamp, updateDoc } from 'firebase/firestore' 
+import { useEffect, useState, useRef } from 'react';
+import { generateUniqSerial, opositeTit, capitalize } from './utils/utils';
 import { Footer } from './components/Footer/Footer';
 import { Table } from './components/Table/Table';
 import { Header } from './components/Header/Header';
+import { Cronometer } from './components/Cronometer/Cronometer';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBgi7l7PQHzg1UwxvBi1TnKPeURYkGDfAw",
@@ -21,20 +22,43 @@ const firebaseConfig = {
 
 function App() {
 
+  const childRef = useRef();
+
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
   const [tomas, setTomas] = useState(null);
   const [average, setAverage] = useState(null);
+  const [avgTits, setAvgTits] = useState(null);
+  const [isTomaActive, setIsTomaActive] = useState(false);
+  const [tomaId, setTomaId] = useState(null);
 
   useEffect(() => {
     getTomas(db).then(data => setTomas(data));
   }, []);
 
   useEffect(() => {
-    averageTomas().then(data => setAverage(data));
+    averageTomas().then(avg => setAverage(avg));
   }, [tomas]);
+
+  useEffect(() => {
+    averageTits().then(avg => setAvgTits(avg));
+  }, [tomas]);
+
+  useEffect(() => {
+    averageTits().then(avg => setAvgTits(avg));
+  }, [isTomaActive]);
+
+  useEffect(() => {
+    if (isTomaActive) childRef.current.toggle();
+    if (!isTomaActive) childRef.current.reset();
+  }, [isTomaActive]);
+
+
+  useEffect(() => {
+    // todo
+  }, [isTomaActive]);
 
 
   /**
@@ -50,17 +74,28 @@ function App() {
    * Set doc
    * @param {*} param0 
    */
-  const writeTomaData = async ({date, time, tit, action}) => {
-    const id = generateUniqSerial();
-    const dateFormated = formatDate(date);
-    await setDoc(doc(db, "tomas-v1", id), {
-      id, 
-      date: dateFormated || new Date().toLocaleDateString("es-ES"), 
-      time:  time ? time + ':25' : new Date().toLocaleTimeString(),
-      timestamp: Timestamp.now(),
-      tit, 
-      action
-    });
+  const writeTomaData = async ({tit}) => {
+    if (!isTomaActive) {
+      const id = generateUniqSerial();
+      setTomaId(id);
+      await setDoc(doc(db, "tomas-v1/", id), {
+        id, 
+        dateStart: new Date().toLocaleDateString("es-ES"),
+        dateEnd: '',
+        timeStart: new Date().toLocaleTimeString(),
+        timeEnd: '',
+        timeStampStart: Timestamp.now(),
+        timeStampEnd: '',
+        tit,
+      });
+    } else {
+      const tomaRef = doc(db, "tomas-v1/", tomaId);
+      await updateDoc(tomaRef, {
+        dateEnd: new Date().toLocaleDateString("es-ES"),
+        timeEnd: new Date().toLocaleTimeString(),
+        timeStampEnd: Timestamp.now(),
+      });
+    }
     getTomas(db).then(data => setTomas(data));
   }
 
@@ -71,18 +106,41 @@ function App() {
    */
   const getTomas = async (db) => {
     const tomasCol = collection(db, 'tomas-v1/');
-    const q = query(tomasCol, orderBy("date", "desc"), orderBy("timestamp", "desc"));
+    const q = query(tomasCol, orderBy("dateEnd", "desc"), orderBy("timeStampEnd", "desc"));
     const tomaSnapshot = await getDocs(q);
     const tomaList = tomaSnapshot.docs.map(doc => doc.data());
     return tomaList;
   }
 
-
+  /**
+   * Calculate average
+   * @returns average
+   */
   const averageTomas = async () => {
     if(!tomas) return 0;
-    const tomasCount = tomas.length;
-    const tomasSum = tomas.reduce((acc, cur) => acc + Number(cur.action), 0);
-    return tomasSum / tomasCount;
+    const withTimestamp = tomas.filter(toma => toma.timeStampEnd > 0);
+    const total = withTimestamp.length;
+    const tomasRest = withTimestamp.map(toma => toma.timeStampEnd.toMillis() - toma.timeStampStart.toMillis());
+    const tomasSum = tomasRest.reduce((acc, cur) => acc + cur);
+    const resultDate = new Date(Math.abs(tomasSum) / total);
+    return resultDate.toLocaleTimeString();
+  }
+
+
+
+  /**
+   * Calculate average of tits
+   * @returns averageTits
+   */
+  const averageTits = async () => { 
+    if(!tomas) return;
+    const withTimestamp = tomas.filter(toma => toma.timeStampEnd > 0);
+    const leftTits = withTimestamp.filter(toma => toma.tit === 'izquierda');
+    const rightTits = withTimestamp.filter(toma => toma.tit === 'derecha');
+    const totalLeftTits = leftTits.length;
+    const totalRightTits = rightTits.length;
+    const result = totalLeftTits > totalRightTits ? 'izquierda' : 'derecha';
+    return result;
   }
   
 
@@ -93,22 +151,19 @@ function App() {
       <div className="col-12 col-s-12">
         <div className="aside">
           <Formik
-            initialValues={{ date: '', time: '', tit: '', action: '' }}
+            initialValues={{ tit: ''}}
             validate={values => {
               const errors = {};
               if (!values.tit) {
                 errors.tit = 'Required';
-              } else if (!values.action) {
-                errors.action = 'Required'
-              } else {
-                // no hay errores
               }
               return errors;
             }}
             onSubmit={(values, { setSubmitting, resetForm }) => {
               writeTomaData(values);
               setSubmitting(false);
-              resetForm();
+              setIsTomaActive(!isTomaActive);
+              // resetForm();
             }}
       >
         {({
@@ -121,34 +176,7 @@ function App() {
           isSubmitting
         }) => (
           <form onSubmit={handleSubmit}>
-            <div className="inputs">
-              <label className="date">Fecha</label>
-              <input
-                type="date"
-                name="date"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.date}
-                errors={errors}
-              />
-              {errors.date && touched.date && (
-                  <span className="error">{errors.date}</span>
-                )}
-              <label className="time">Hora</label>
-              <input
-                type="time"
-                name="time"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.time}
-                errors={errors}
-              />
-                {errors.time && touched.time && (
-                  <span className="error">{errors.time}</span>
-                )}
-
-            </div>
-            
+           
             <div className="col-s-12 col-xs-12" role="group" aria-labelledby="radio-tit">
             <div id="radio-tit">Teta</div>      
               <label htmlFor="tit" className='col-xs-12 col-s-6'>
@@ -160,30 +188,25 @@ function App() {
               Derecha 
               <Field type="radio" name="tit" value="derecha" className="col-xs-6 col-s-6"  /> 
              </label>
+
+            <div>
+              <Cronometer ref={childRef}/>
+            </div>
+
+            <div className='col-xs-12 col-s-12'>
+             <span>
+               La última teta fue 
+               <b className='error'>{ ` ${capitalize(avgTits)} ` } </b> 
+                te toca la <b className='now'>{ ` ${opositeTit(avgTits)}` }</b>
+              </span>
+            </div>
             </div>
               {errors.tit && (
                 <span className="error">{errors.tit}</span>
               )}
             
-            
-            <div className="col-s-12 col-xs-12" role="group" aria-labelledby="radio-action">
-            <div id="radio-action">Acción</div>
-              <label htmlFor="action" className='col-xs-12 col-s-6'>
-              Empieza
-                <Field type="radio" name="action" value="empieza" className="col-xs-6 col-s-6" />
-                  
-              </label>
-              <label htmlFor="action" className='col-xs-12 col-s-6 '>
-              Termina
-                <Field type="radio" name="action" value="termina" className="col-xs-6 col-s-6 "/>
-                  
-              </label>
-              </div>
-              {errors.action && (
-                <span className="error">{errors.action}</span>
-              )}
             <button type="submit" className="button-register" disabled={isSubmitting}>
-              Registrar
+             {isTomaActive ? 'Finalizar Toma' : 'Iniciar Toma'}
             </button>
           </form>
         )}

@@ -7,8 +7,8 @@ export const Items = (props) => {
 
     const iconDelete = <FontAwesomeIcon icon={faTrash} />
 
-    const { date, time, tit, action, id } = props.toma
-    const { handleDelete } = props
+    const { dateStart, dateEnd, timeStart, timeEnd, tit, id } = props.toma
+    const { handleDelete, average } = props
     return (
         <>
             <thead>
@@ -16,16 +16,16 @@ export const Items = (props) => {
                     <th scope="col">Fecha</th>
                     <th scope="col">Hora</th>
                     <th scope="col">Teta</th>
-                    <th scope="col">Acción</th>
+                    <th scope="col">Promedio</th>
                     <th scope="col">Borrar</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td data-label="Fecha">{ date }</td>
-                    <td data-label="Hora">{ time }</td>
+                    <td data-label="Fecha">{dateStart === dateEnd ? dateEnd : `${dateStart} - ${dateEnd}`}</td>
+                    <td data-label="Hora">{ `${timeStart} - ${timeEnd}`}</td>
                     <td data-label="Teta">{ tit }</td>
-                    <td data-label="Acción">{ action }</td>
+                    <td data-label="Promedio">{ average }</td>
                     <td data-label="Borrar"><button onClick={ () => handleDelete(id) }>{ iconDelete }</button></td>
                 </tr>
             </tbody>
