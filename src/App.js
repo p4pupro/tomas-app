@@ -54,8 +54,7 @@ function App() {
   // }, [isTomaActive]);
 
   useEffect(() => {
-    if (tomas) console.log(tomas[tomas.length -1])
-    if (!isTomaActive && tomas) setAvgTits(tomas[tomas.length -1].tit);
+    if (!isTomaActive && tomas) setAvgTits(tomas[0].tit);
   }, [isTomaActive, tomas]);
 
    useEffect(() => {
