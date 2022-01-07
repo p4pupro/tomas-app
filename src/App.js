@@ -2,12 +2,13 @@ import './App.css';
 import { Formik, Field } from 'formik';
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs, setDoc, query, orderBy, deleteDoc, doc, Timestamp, updateDoc } from 'firebase/firestore' 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBaby } from '@fortawesome/free-solid-svg-icons'
 import { generateUniqSerial, opositeTit, capitalize } from './utils/utils';
 import { Footer } from './components/Footer/Footer';
 import { Table } from './components/Table/Table';
 import { Header } from './components/Header/Header';
-import { Cronometer } from './components/Cronometer/Cronometer';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBgi7l7PQHzg1UwxvBi1TnKPeURYkGDfAw",
@@ -22,17 +23,18 @@ const firebaseConfig = {
 
 function App() {
 
-  const childRef = useRef();
-
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+
+  const iconBaby = <FontAwesomeIcon icon={faBaby} width={50} height={50} />
 
   const [tomas, setTomas] = useState(null);
   const [average, setAverage] = useState(null);
   const [avgTits, setAvgTits] = useState(null);
   const [isTomaActive, setIsTomaActive] = useState(false);
   const [tomaId, setTomaId] = useState(null);
+  const [toma, setToma] = useState(null);
   const [tomaTime, setTomaTime] = useState(null);
 
   useEffect(() => {
@@ -43,13 +45,18 @@ function App() {
     averageTomas().then(avg => setAverage(avg));
   }, [tomas]);
 
-  useEffect(() => {
-    averageTits().then(avg => setAvgTits(avg));
-  }, [tomas]);
+  // useEffect(() => {
+  //   averageTits().then(avg => setAvgTits(avg));
+  // }, [tomas]);
+
+  // useEffect(() => {
+  //   averageTits().then(avg => setAvgTits(avg));
+  // }, [isTomaActive]);
 
   useEffect(() => {
-    averageTits().then(avg => setAvgTits(avg));
-  }, [isTomaActive]);
+    if (tomas) console.log(tomas[tomas.length -1])
+    if (!isTomaActive && tomas) setAvgTits(tomas[tomas.length -1].tit);
+  }, [isTomaActive, tomas]);
 
    useEffect(() => {
      if (isTomaActive) setTomaTime(new Date().toLocaleTimeString());
@@ -58,7 +65,7 @@ function App() {
 
 
   useEffect(() => {
-    // todo
+    if (!isTomaActive && tomas) tomas[tomas.length -1].tomaTime = tomaTime;
   }, [isTomaActive]);
 
 
@@ -136,11 +143,11 @@ function App() {
   const averageTits = async () => { 
     if(!tomas) return;
     const withTimestamp = tomas.filter(toma => toma.timeStampEnd > 0);
-    const leftTits = withTimestamp.filter(toma => toma.tit === 'izquierda');
-    const rightTits = withTimestamp.filter(toma => toma.tit === 'derecha');
+    const leftTits = withTimestamp.filter(toma => toma.tit === 'izquierdo');
+    const rightTits = withTimestamp.filter(toma => toma.tit === 'derecho');
     const totalLeftTits = leftTits.length;
     const totalRightTits = rightTits.length;
-    const result = totalLeftTits > totalRightTits ? 'izquierda' : 'derecha';
+    const result = totalLeftTits > totalRightTits ? 'izquierdo' : 'derecho';
     return result;
   }
   
@@ -160,47 +167,54 @@ function App() {
               }
               return errors;
             }}
-            onSubmit={(values, { setSubmitting, resetForm }) => {
+            onSubmit={(values, { setSubmitting }) => {
               writeTomaData(values);
               setSubmitting(false);
               setIsTomaActive(!isTomaActive);
-              // resetForm();
             }}
       >
         {({
-          values,
           errors,
-          touched,
-          handleChange,
-          handleBlur,
           handleSubmit,
           isSubmitting
         }) => (
           <form onSubmit={handleSubmit}>
            
             <div className="col-s-12 col-xs-12" role="group" aria-labelledby="radio-tit">
-            <div id="radio-tit">Teta</div>      
+            <div id="radio-tit">Pecho</div>      
               <label htmlFor="tit" className='col-xs-12 col-s-6'>
-              Izquierda 
-              <Field type="radio" name="tit" value="izquierda" className="col-xs-6 col-s-6" />
+              Izquierdo 
+              <Field type="radio" name="tit" value="izquierdo" className="col-xs-6 col-s-6" />
              
               </label>
               <label htmlFor="tit" className='col-xs-12 col-s-6'>
-              Derecha 
-              <Field type="radio" name="tit" value="derecha" className="col-xs-6 col-s-6"  /> 
+              Derecho 
+              <Field type="radio" name="tit" value="derecho" className="col-xs-6 col-s-6"  /> 
              </label>
 
             <div>
               { tomaTime && (<span className='timer'>{ tomaTime }</span>) } 
             </div>
 
-            <div className='col-xs-12 col-s-12'>
-             <span>
-               La última teta fue 
-               <b className='error'>{ ` ${capitalize(avgTits)} ` } </b> 
-                te toca la <b className='now'>{ ` ${opositeTit(avgTits)}` }</b>
-              </span>
-            </div>
+            { !isTomaActive && (
+                <div className='col-xs-12 col-s-12'>
+                  <span>
+                    El último pecho fue 
+                    <b className='error'>{ ` ${capitalize(avgTits)} ` } </b> 
+                    te toca el <b className='now'>{ ` ${opositeTit(avgTits)}` }</b>
+                  </span>
+              </div>
+              )
+            }
+            
+
+            { isTomaActive && ( 
+                <div>
+                  { iconBaby }
+                </div>
+              )
+            }
+
             </div>
               {errors.tit && (
                 <span className="error">{errors.tit}</span>

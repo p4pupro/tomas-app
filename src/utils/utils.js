@@ -7,9 +7,9 @@ export const generateUniqSerial = () => {
 }
 
 export const opositeTit = (tit) => {
-    if(tit === 'izquierda') return 'Derecha';
-    if(tit === 'derecha') return 'Izquierda';
-    if(!tit || tit !== 'izquierda' || tit !== 'derecha') return;  
+    if(tit === 'izquierdo') return 'Derecho';
+    if(tit === 'derecho') return 'Izquierdo';
+    if(!tit || tit !== 'izquierdo' || tit !== 'derecho') return;  
 }
 
 export const capitalize = (text) => {

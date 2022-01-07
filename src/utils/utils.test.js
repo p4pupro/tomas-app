@@ -2,16 +2,16 @@ import {  opositeTit, capitalize } from './utils';
 
 describe('Run all test of Utils', () => {
 
-    test('opositeTit should return "Derecha" when "izquierda" is passed', () => {
-        const tit = 'izquierda';
+    test('opositeTit should return "Derecha" when "izquierdo" is passed', () => {
+        const tit = 'izquierdo';
         const result = opositeTit(tit);
-        expect(result).toBe('Derecha');
+        expect(result).toBe('Derecho');
     });
 
-    test('opositeTit should return "Izquierda" when "derecha" is passed', () => {
-        const tit = 'derecha';
+    test('opositeTit should return "Izquierdo" when "derecho" is passed', () => {
+        const tit = 'derecho';
         const result = opositeTit(tit);
-        expect(result).toBe('Izquierda');
+        expect(result).toBe('Izquierdo');
     });
 
     test('opositeTit should return undefined when undefined is passed', () => { 
@@ -26,10 +26,10 @@ describe('Run all test of Utils', () => {
         expect(result).toBe(undefined);
     });
         
-    test('capitalize should return "Teta" when "teta" is passed', () => {
-        const text = 'teta';
+    test('capitalize should return "Pecho" when "pecho" is passed', () => {
+        const text = 'pecho';
         const result = capitalize(text);
-        expect(result).toBe('Teta');
+        expect(result).toBe('Pecho');
     });
     
     test('capitalize should return undefined when undefined is passed', () => {

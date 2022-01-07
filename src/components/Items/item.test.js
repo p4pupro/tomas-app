@@ -5,7 +5,7 @@ test('renders Items and check Fecha text', () => {
     const toma = { 
        date: '12/12/2021', 
        time: '12:12', 
-       tit: 'izquierda', 
+       tit: 'izquierdo', 
        action: 'empieza', 
        id: 'SD8F97G6SDF' 
     };
