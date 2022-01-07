@@ -27,7 +27,7 @@ function App() {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  const iconBaby = <FontAwesomeIcon icon={faBaby} width={50} height={50} />
+  const iconBaby = <FontAwesomeIcon icon={faBaby} size="3x" />
 
   const [tomas, setTomas] = useState(null);
   const [average, setAverage] = useState(null);
@@ -45,13 +45,6 @@ function App() {
     averageTomas().then(avg => setAverage(avg));
   }, [tomas]);
 
-  // useEffect(() => {
-  //   averageTits().then(avg => setAvgTits(avg));
-  // }, [tomas]);
-
-  // useEffect(() => {
-  //   averageTits().then(avg => setAvgTits(avg));
-  // }, [isTomaActive]);
 
   useEffect(() => {
     if (!isTomaActive && tomas) setAvgTits(tomas[0].tit);
@@ -208,7 +201,7 @@ function App() {
             
 
             { isTomaActive && ( 
-                <div>
+                <div className='space'>
                   { iconBaby }
                 </div>
               )

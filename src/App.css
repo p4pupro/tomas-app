@@ -25,6 +25,10 @@ html {
   color: #9933cc;
 }
 
+.space {
+  padding-top: 15px;
+}
+
 .timer {
   font-size: 1.5em;
   font-weight: bold;
