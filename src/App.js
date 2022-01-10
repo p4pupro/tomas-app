@@ -31,10 +31,10 @@ function App() {
 
   const [tomas, setTomas] = useState(null);
   const [average, setAverage] = useState(null);
+  const [lastTit, setLastTit] = useState(null);
   const [avgTits, setAvgTits] = useState(null);
   const [isTomaActive, setIsTomaActive] = useState(false);
   const [tomaId, setTomaId] = useState(null);
-  const [toma, setToma] = useState(null);
   const [tomaTime, setTomaTime] = useState(null);
 
   useEffect(() => {
@@ -45,9 +45,12 @@ function App() {
     averageTomas().then(avg => setAverage(avg));
   }, [tomas]);
 
+  useEffect(() => {
+    averageTits().then(avgTits => setAvgTits(avgTits));
+  }, [tomas]);
 
   useEffect(() => {
-    if (!isTomaActive && tomas) setAvgTits(tomas[0].tit);
+    if (!isTomaActive && tomas) setLastTit(tomas[0].tit);
   }, [isTomaActive, tomas]);
 
    useEffect(() => {
@@ -106,9 +109,11 @@ function App() {
    */
   const getTomas = async (db) => {
     const tomasCol = collection(db, 'tomas-v1/');
-    const q = query(tomasCol, orderBy("dateEnd", "desc"), orderBy("timeStampEnd", "desc"));
+    // const q = query(tomasCol, orderBy("dateEnd", "desc"), orderBy("timeStampEnd", "desc"));
+    const q = query(tomasCol, orderBy("timeStampStart", "desc"));
     const tomaSnapshot = await getDocs(q);
     const tomaList = tomaSnapshot.docs.map(doc => doc.data());
+    console.log(tomaList);
     return tomaList;
   }
 
@@ -139,7 +144,10 @@ function App() {
     const rightTits = withTimestamp.filter(toma => toma.tit === 'derecho');
     const totalLeftTits = leftTits.length;
     const totalRightTits = rightTits.length;
-    const result = totalLeftTits > totalRightTits ? 'izquierdo' : 'derecho';
+    const sumTotal = totalLeftTits + totalRightTits;
+    const percentLeft = totalLeftTits / sumTotal * 100;
+    const percentRight = totalRightTits / sumTotal * 100;
+    const result = [percentLeft, percentRight];
     return result;
   }
   
@@ -192,8 +200,8 @@ function App() {
                 <div className='col-xs-12 col-s-12'>
                   <span>
                     El último pecho fue 
-                    <b className='error'>{ ` ${capitalize(avgTits)} ` } </b> 
-                    te toca el <b className='now'>{ ` ${opositeTit(avgTits)}` }</b>
+                    <b className='error'>{ ` ${capitalize(lastTit)} ` } </b> 
+                    te toca el <b className='now'>{ ` ${opositeTit(lastTit)}` }</b>
                   </span>
               </div>
               )
