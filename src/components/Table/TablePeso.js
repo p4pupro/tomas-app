@@ -1,22 +1,21 @@
-import { Items } from '../Items/Items';
+import { ItemPeso } from '../Items/ItemPeso';
 import './table.css';
 
 
-export const Table = (props) => {
+export const TablePeso = (props) => {
 
-  const { tomas, average, handleDelete,  } = props
+  const { peso, handleDelete } = props
   
   return (
     <div className="wrap-table">
       <table>
         <caption>Historial</caption>
           {
-            tomas ? tomas.map((toma, index) => {
+            peso ? peso.map((pes, index) => {
               return (
-                <Items
+                <ItemPeso
                   key={index} 
-                  toma={toma}
-                  average={average}
+                  pes={pes}
                   handleDelete={handleDelete} 
                 />
               )

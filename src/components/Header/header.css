@@ -2,4 +2,31 @@
     background-color: #9933cc;
     color: #ffffff;
     padding: 15px;
-  }
+}
+
+.header-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.header-buttons-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-button {  
+    color: #ffffff;
+    background-color: #33b5e5;
+    padding: 5px;
+    width: 60px;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.link-text {
+    color: #ffffff;
+    text-decoration: none;
+}

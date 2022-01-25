@@ -3,7 +3,15 @@ import { Header } from './Header';
 
 test('renders title of header', () => {
     render(<Header />);
-    const title = screen.getByText(/Tomas Baby - Registra sus tomas/i);
+    const title = screen.getByText(/Baby Dan/i);
     expect(title).toBeInTheDocument();
 });
+
+
+test('renders licks buttons', () => {
+    render(<Header />);
+    const buttons = screen.getAllByRole('a');
+    expect(buttons).toHaveLength(5);
+});
+
   

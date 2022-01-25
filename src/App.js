@@ -1,23 +1,25 @@
-import './App.css';
-import { Formik, Field } from 'formik';
+
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, setDoc, query, orderBy, deleteDoc, doc, Timestamp, updateDoc } from 'firebase/firestore' 
-import { useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBaby } from '@fortawesome/free-solid-svg-icons'
-import { generateUniqSerial, opositeTit, capitalize } from './utils/utils';
+import { getFirestore} from 'firebase/firestore'; 
 import { Footer } from './components/Footer/Footer';
-import { Table } from './components/Table/Table';
 import { Header } from './components/Header/Header';
+import { Layout } from './components/Layout/Layout';
+import { Tomas } from './pages/Tomas/Tomas';
+import { Cacas } from './pages/Cacas/Cacas';
+import { Pis } from './pages/Pis/Pis';
+import { Peso } from './pages/Peso/Peso';
+import { Altura } from './pages/Altura/Altura';
+import { Routes, Route, Link } from "react-router-dom";
+
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBgi7l7PQHzg1UwxvBi1TnKPeURYkGDfAw",
-  authDomain: "tomas-v1.firebaseapp.com",
-  databaseURL: "https://tomas-v1-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "tomas-v1",
-  storageBucket: "tomas-v1.appspot.com",
-  messagingSenderId: "81567280190",
-  appId: "1:81567280190:web:a71917fb1556d508d3b56f"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID
 };
 
 
@@ -27,215 +29,35 @@ function App() {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  const iconBaby = <FontAwesomeIcon icon={faBaby} size="3x" />
-
-  const [tomas, setTomas] = useState(null);
-  const [average, setAverage] = useState(null);
-  const [lastTit, setLastTit] = useState(null);
-  const [avgTits, setAvgTits] = useState(null);
-  const [isTomaActive, setIsTomaActive] = useState(false);
-  const [tomaId, setTomaId] = useState(null);
-  const [tomaTime, setTomaTime] = useState(null);
-
-  useEffect(() => {
-    getTomas(db).then(data => setTomas(data));
-  }, []);
-
-  useEffect(() => {
-    averageTomas().then(avg => setAverage(avg));
-  }, [tomas]);
-
-  useEffect(() => {
-    averageTits().then(avgTits => setAvgTits(avgTits));
-  }, [tomas]);
-
-  useEffect(() => {
-    if (!isTomaActive && tomas) setLastTit(tomas[0].tit);
-  }, [isTomaActive, tomas]);
-
-   useEffect(() => {
-     if (isTomaActive) setTomaTime(new Date().toLocaleTimeString());
-     if (!isTomaActive) setTomaTime(null);
-   }, [isTomaActive]);
-
-
-  useEffect(() => {
-    if (!isTomaActive && tomas) tomas[tomas.length -1].tomaTime = tomaTime;
-  }, [isTomaActive]);
-
-
-  /**
-   *  Eliminate toma
-   * @param {*} id 
-   */
-  const handleDelete = async (id) => {
-    await deleteDoc(doc(db, "tomas-v1", id));
-    getTomas(db).then(data => setTomas(data));
-  }
-
-  /**
-   * Set doc
-   * @param {*} param0 
-   */
-  const writeTomaData = async ({tit}) => {
-    if (!isTomaActive) {
-      const id = generateUniqSerial();
-      setTomaId(id);
-      await setDoc(doc(db, "tomas-v1/", id), {
-        id, 
-        dateStart: new Date().toLocaleDateString("es-ES"),
-        dateEnd: '',
-        timeStart: new Date().toLocaleTimeString(),
-        timeEnd: '',
-        timeStampStart: Timestamp.now(),
-        timeStampEnd: '',
-        tit,
-      });
-    } else {
-      const tomaRef = doc(db, "tomas-v1/", tomaId);
-      await updateDoc(tomaRef, {
-        dateEnd: new Date().toLocaleDateString("es-ES"),
-        timeEnd: new Date().toLocaleTimeString(),
-        timeStampEnd: Timestamp.now(),
-      });
-    }
-    getTomas(db).then(data => setTomas(data));
-  }
-
-  /**
-   * Get All Documents order by date and time
-   * @param {*} db 
-   * @returns 
-   */
-  const getTomas = async (db) => {
-    const tomasCol = collection(db, 'tomas-v1/');
-    // const q = query(tomasCol, orderBy("dateEnd", "desc"), orderBy("timeStampEnd", "desc"));
-    const q = query(tomasCol, orderBy("timeStampStart", "desc"));
-    const tomaSnapshot = await getDocs(q);
-    const tomaList = tomaSnapshot.docs.map(doc => doc.data());
-    console.log(tomaList);
-    return tomaList;
-  }
-
-  /**
-   * Calculate average
-   * @returns average
-   */
-  const averageTomas = async () => {
-    if(!tomas) return 0;
-    const withTimestamp = tomas.filter(toma => toma.timeStampEnd > 0);
-    const total = withTimestamp.length;
-    const tomasRest = withTimestamp.map(toma => toma.timeStampEnd.toMillis() - toma.timeStampStart.toMillis());
-    const tomasSum = tomasRest.reduce((acc, cur) => acc + cur);
-    const resultDate = new Date(Math.abs(tomasSum) / total);
-    return resultDate.toLocaleTimeString();
-  }
-
-
-
-  /**
-   * Calculate average of tits
-   * @returns averageTits
-   */
-  const averageTits = async () => { 
-    if(!tomas) return;
-    const withTimestamp = tomas.filter(toma => toma.timeStampEnd > 0);
-    const leftTits = withTimestamp.filter(toma => toma.tit === 'izquierdo');
-    const rightTits = withTimestamp.filter(toma => toma.tit === 'derecho');
-    const totalLeftTits = leftTits.length;
-    const totalRightTits = rightTits.length;
-    const sumTotal = totalLeftTits + totalRightTits;
-    const percentLeft = totalLeftTits / sumTotal * 100;
-    const percentRight = totalRightTits / sumTotal * 100;
-    const result = [percentLeft, percentRight];
-    return result;
-  }
-  
-
   return (
-    <>
+    <>  
       <Header />
-    <div className="row">
-      <div className="col-12 col-s-12">
-        <div className="aside">
-          <Formik
-            initialValues={{ tit: ''}}
-            validate={values => {
-              const errors = {};
-              if (!values.tit) {
-                errors.tit = 'Required';
-              }
-              return errors;
-            }}
-            onSubmit={(values, { setSubmitting }) => {
-              writeTomaData(values);
-              setSubmitting(false);
-              setIsTomaActive(!isTomaActive);
-            }}
-      >
-        {({
-          errors,
-          handleSubmit,
-          isSubmitting
-        }) => (
-          <form onSubmit={handleSubmit}>
-           
-            <div className="col-s-12 col-xs-12" role="group" aria-labelledby="radio-tit">
-            <div id="radio-tit">Pecho</div>      
-              <label htmlFor="tit" className='col-xs-12 col-s-6'>
-              Izquierdo 
-              <Field type="radio" name="tit" value="izquierdo" className="col-xs-6 col-s-6" />
-             
-              </label>
-              <label htmlFor="tit" className='col-xs-12 col-s-6'>
-              Derecho 
-              <Field type="radio" name="tit" value="derecho" className="col-xs-6 col-s-6"  /> 
-             </label>
-
-            <div>
-              { tomaTime && (<span className='timer'>{ tomaTime }</span>) } 
-            </div>
-
-            { !isTomaActive && (
-                <div className='col-xs-12 col-s-12'>
-                  <span>
-                    El último pecho fue 
-                    <b className='error'>{ ` ${capitalize(lastTit)} ` } </b> 
-                    te toca el <b className='now'>{ ` ${opositeTit(lastTit)}` }</b>
-                  </span>
-              </div>
-              )
-            }
-            
-
-            { isTomaActive && ( 
-                <div className='space'>
-                  { iconBaby }
-                </div>
-              )
-            }
-
-            </div>
-              {errors.tit && (
-                <span className="error">{errors.tit}</span>
-              )}
-            
-            <button type="submit" className="button-register" disabled={isSubmitting}>
-             {isTomaActive ? 'Finalizar Toma' : 'Iniciar Toma'}
-            </button>
-          </form>
-        )}
-      </Formik>
-        </div>
-
-        <Table tomas={tomas} average={average} handleDelete={handleDelete} />
-        <Footer />
-      </div>
-    </div>
-      
-  </>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Tomas db={db}/>} />
+              <Route path="cacas" element={<Cacas db={db}/>} />
+              <Route path="pis" element={<Pis db={db}/>} />
+              <Route path="peso" element={<Peso db={db}/>} />
+              <Route path="altura" element={<Altura db={db}/>} />
+              <Route path="*" element={<NoMatch />} />
+          </Route>
+        </Routes>
+      <Footer />  
+    </>
   );
 }
+
+function NoMatch() {
+  return (
+    <>
+      <h2>¡Ups! &#128531; ¡Te has equivocado!</h2>
+      <p>
+        Ir al <Link to="/"><b>Inicio</b></Link>
+      </p>
+    </>
+  );
+}
+
 
 export default App;
 
