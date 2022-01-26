@@ -39,7 +39,7 @@ function App() {
               <Route path="pis" element={<Pis db={db}/>} />
               <Route path="peso" element={<Peso db={db}/>} />
               <Route path="altura" element={<Altura db={db}/>} />
-              {/* <Route path="*" element={<NoMatch />} /> */}
+              <Route path="*" element={<NoMatch />} />
           </Route>
         </Routes>
       <Footer />  
