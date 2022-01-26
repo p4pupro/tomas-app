@@ -35,10 +35,10 @@ function App() {
         <Routes>
           <Route path="tomas-app/" element={<Layout />}>
             <Route index element={<Tomas db={db}/>} />
-              <Route path="tomas-app/cacas" element={<Cacas db={db}/>} />
-              <Route path="tomas-app/pis" element={<Pis db={db}/>} />
-              <Route path="tomas-app/peso" element={<Peso db={db}/>} />
-              <Route path="tomas-app/altura" element={<Altura db={db}/>} />
+              <Route path="cacas" element={<Cacas db={db}/>} />
+              <Route path="pis" element={<Pis db={db}/>} />
+              <Route path="peso" element={<Peso db={db}/>} />
+              <Route path="altura" element={<Altura db={db}/>} />
               {/* <Route path="*" element={<NoMatch />} /> */}
           </Route>
         </Routes>
