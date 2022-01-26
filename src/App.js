@@ -33,7 +33,7 @@ function App() {
     <>  
       <Header />
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path="tomas-app/" element={<Layout />}>
             <Route index element={<Tomas db={db}/>} />
               <Route path="cacas" element={<Cacas db={db}/>} />
               <Route path="pis" element={<Pis db={db}/>} />
@@ -52,7 +52,7 @@ function NoMatch() {
     <>
       <h2>¡Ups! &#128531; ¡Te has equivocado!</h2>
       <p>
-        Ir al <Link to="/"><b>Inicio</b></Link>
+        Ir al <Link to="tomas-app/"><b>Inicio</b></Link>
       </p>
     </>
   );
