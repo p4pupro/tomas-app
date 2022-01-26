@@ -11,16 +11,16 @@ export const Header = () => {
                     <Link to="tomas-app/" className="link-text">Tomas</Link>
                 </div>
                 <div className="header-button">
-                    <Link to="tomas-app/cacas" className="link-text">Cacas</Link>
+                    <Link to="cacas" className="link-text">Cacas</Link>
                 </div>
                 <div className="header-button">
-                    <Link to="tomas-app/pis" className="link-text">Pis</Link>
+                    <Link to="pis" className="link-text">Pis</Link>
                 </div>
                 <div className="header-button">
-                    <Link to="tomas-app/peso" className="link-text">Peso</Link>
+                    <Link to="peso" className="link-text">Peso</Link>
                 </div>
                 <div className="header-button">
-                    <Link to="tomas-app/altura" className="link-text">Altura</Link>
+                    <Link to="altura" className="link-text">Altura</Link>
                 </div>
             </div>
         </div>
