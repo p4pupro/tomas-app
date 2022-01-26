@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 import { collection, getDocs, setDoc, query, orderBy, deleteDoc, doc, Timestamp } from 'firebase/firestore';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBaby } from '@fortawesome/free-solid-svg-icons';
 import { TablePeso } from '../../components/Table/TablePeso';
 import '../../App.css';
 
-export const Peso = (props) => {
+const Peso = (props) => {
 
   const { db } = props;
 
@@ -16,26 +16,27 @@ export const Peso = (props) => {
 
   const iconBaby = <FontAwesomeIcon icon={faBaby} size={sizeIcon} />
 
+  const calculateSizeIcon = useCallback(() => {
+    if (!weight) return;
+
+    if (weight > 9 && weight <= 12) {
+      return '5x';
+    } if(weight > 6 && weight <= 9) {
+      return '4x';
+    } if(weight > 3 && weight <= 6) {
+      return '3x';
+    } else {
+      return'2x';
+    }
+  }, [weight]);
+
   useEffect(() => {
     if(db) getPesos(db).then(data => setPesos(data));
   }, [db]);
 
   useEffect(() => {
-    const calculateSizeIcon = () => {
-      if (!weight) return;
-  
-      if (weight > 9 && weight <= 12) {
-        return '5x';
-      } if(weight > 6 && weight <= 9) {
-        return '4x';
-      } if(weight > 3 && weight <= 6) {
-        return '3x';
-      } else {
-        return'2x';
-      }
-    }
     setSizeIcon(calculateSizeIcon());
-  }, [weight]);
+  }, [weight, calculateSizeIcon]);
 
 
       /**
@@ -113,3 +114,5 @@ export const Peso = (props) => {
      </>
     );
   }
+
+  export default Peso;

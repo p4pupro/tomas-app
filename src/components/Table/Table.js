@@ -2,7 +2,7 @@ import { Items } from '../Items/Items';
 import './table.css';
 
 
-export const Table = (props) => {
+const Table = (props) => {
 
   const { tomas, average, handleDelete,  } = props
   
@@ -14,11 +14,11 @@ export const Table = (props) => {
             tomas ? tomas.map((toma, index) => {
               return (
                 <Items
-                  key={index} 
-                  toma={toma}
-                  average={average}
-                  handleDelete={handleDelete} 
-                />
+                    key={index} 
+                    toma={toma}
+                    average={average}
+                    handleDelete={handleDelete} 
+                  />
               )
             })
           :
@@ -28,3 +28,5 @@ export const Table = (props) => {
     </div>
   )
 }
+
+export default Table;

@@ -1,12 +1,16 @@
 
 import { Formik, Field } from 'formik';
-import { useEffect, useState } from 'react';
+import { useEffect, Suspense, lazy, useCallback, useState } from 'react';
 import { Table } from '../../components/Table/Table';
+
 import { collection, getDocs, setDoc, query, orderBy, deleteDoc, doc, Timestamp, updateDoc } from 'firebase/firestore' 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBaby } from '@fortawesome/free-solid-svg-icons'
 import { generateUniqSerial, opositeTit, capitalize } from '../../utils/utils';
 import '../../App.css';
+
+const LazyTable = lazy(() => import('../../components/Table/Table'));
+
 
 export const Tomas = (props) => {
 
@@ -21,17 +25,51 @@ export const Tomas = (props) => {
     const [tomaId, setTomaId] = useState(null);
     const [tomaTime, setTomaTime] = useState(null);
 
+    /**
+   * Calculate average of tits
+   * @returns averageTits
+   */
+  const averageTits = useCallback(async () => { 
+    if(!tomas) return;
+    const withTimestamp = tomas.filter(toma => toma.timeStampEnd > 0);
+    const leftTits = withTimestamp.filter(toma => toma.tit === 'izquierdo');
+    const rightTits = withTimestamp.filter(toma => toma.tit === 'derecho');
+    const totalLeftTits = leftTits.length;
+    const totalRightTits = rightTits.length;
+    const sumTotal = totalLeftTits + totalRightTits;
+    const percentLeft = totalLeftTits / sumTotal * 100;
+    const percentRight = totalRightTits / sumTotal * 100;
+    const result = [percentLeft, percentRight];
+    return result;
+  }, [tomas]);
+
+  /**
+   * Calculate average
+   * @returns average
+   */
+   const averageTomas = useCallback(async () => {
+    if(!tomas) return 0;
+    const withTimestamp = tomas.filter(toma => toma.timeStampEnd > 0);
+    const total = withTimestamp.length;
+    const tomasRest = withTimestamp.map(toma => toma.timeStampEnd.toMillis() - toma.timeStampStart.toMillis());
+    const tomasSum = tomasRest.reduce((acc, cur) => acc + cur);
+    const resultDate = new Date(Math.abs(tomasSum) / total);
+    return resultDate.toLocaleTimeString();
+  }, [tomas]);
+
+
+
     useEffect(() => {
         if(db) getTomas(db).then(data => setTomas(data));
       }, [db]);
     
       useEffect(() => {
         averageTomas().then(avg => setAverage(avg));
-      }, [tomas]);
+      }, [tomas, averageTomas]);
     
       useEffect(() => {
         averageTits().then(avgTits => setAvgTits(avgTits));
-      }, [tomas]);
+      }, [tomas, averageTits]);
     
       useEffect(() => {
         if (!isTomaActive && tomas) setLastTit(tomas[0].tit);
@@ -45,7 +83,7 @@ export const Tomas = (props) => {
     
       useEffect(() => {
         if (!isTomaActive && tomas) tomas[tomas.length -1].tomaTime = tomaTime;
-      }, [isTomaActive]);
+      }, [isTomaActive, tomas, tomaTime]);
 
       /**
    *  Eliminate toma
@@ -99,40 +137,7 @@ export const Tomas = (props) => {
     return tomaList;
   }
 
-  /**
-   * Calculate average
-   * @returns average
-   */
-  const averageTomas = async () => {
-    if(!tomas) return 0;
-    const withTimestamp = tomas.filter(toma => toma.timeStampEnd > 0);
-    const total = withTimestamp.length;
-    const tomasRest = withTimestamp.map(toma => toma.timeStampEnd.toMillis() - toma.timeStampStart.toMillis());
-    const tomasSum = tomasRest.reduce((acc, cur) => acc + cur);
-    const resultDate = new Date(Math.abs(tomasSum) / total);
-    return resultDate.toLocaleTimeString();
-  }
-
-
-
-  /**
-   * Calculate average of tits
-   * @returns averageTits
-   */
-  const averageTits = async () => { 
-    if(!tomas) return;
-    const withTimestamp = tomas.filter(toma => toma.timeStampEnd > 0);
-    const leftTits = withTimestamp.filter(toma => toma.tit === 'izquierdo');
-    const rightTits = withTimestamp.filter(toma => toma.tit === 'derecho');
-    const totalLeftTits = leftTits.length;
-    const totalRightTits = rightTits.length;
-    const sumTotal = totalLeftTits + totalRightTits;
-    const percentLeft = totalLeftTits / sumTotal * 100;
-    const percentRight = totalRightTits / sumTotal * 100;
-    const result = [percentLeft, percentRight];
-    return result;
-  }
-
+  
 return (
     <>
           <Formik
@@ -204,7 +209,9 @@ return (
         )}
       </Formik>
       
-      <Table tomas={tomas} average={average} handleDelete={handleDelete} />
+      <Suspense fallback={<h1>Cargando...</h1>}>         
+        <LazyTable tomas={tomas} average={average} handleDelete={handleDelete} />
+      </Suspense>
     </>
     )
 }

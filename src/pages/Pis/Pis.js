@@ -1,16 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 import { Formik, Field } from 'formik';
 import { collection, getDocs, setDoc, query, orderBy, deleteDoc, doc, Timestamp, where } from 'firebase/firestore';
 import { TablePis } from '../../components/Table/TablePis';
 import '../../App.css';
 
-export const Pis = (props) => {
+const Pis = (props) => {
 
   const { db } = props;
 
   const [pis, setPis] = useState(null);
   const [average, setAverage] = useState(null);
   const [total, setTotal] = useState(0);
+
+  const averagePis = useCallback(() => {
+    if(!pis) return;
+    const total = pis.reduce((acc, pis) => {
+        return acc + 1;
+    }, 0);
+    const average = total / pis.length;
+    return average;
+  }, [pis]);
 
   useEffect(() => {
     if(db) getPis(db).then(data => setPis(data));
@@ -21,16 +30,9 @@ export const Pis = (props) => {
   }, [db]);
 
   useEffect(() => {
-    const averagePis = () => {
-      if(!pis) return;
-      const total = pis.reduce((acc, pis) => {
-          return acc + 1;
-      }, 0);
-      const average = total / pis.length;
-      return average;
-    }
     setAverage(averagePis());
-  }, [pis]);
+  }, [pis, averagePis]);
+
 
       /**
    *  Eliminate doc
@@ -135,3 +137,5 @@ export const Pis = (props) => {
     </>
     );
   }
+
+  export default Pis;

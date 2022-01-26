@@ -1,16 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 import { Formik, Field } from 'formik';
 import { collection, getDocs, setDoc, query, orderBy, deleteDoc, doc, Timestamp, where } from 'firebase/firestore';
 import { TableCaca } from '../../components/Table/TableCaca';
 import '../../App.css';
 
-export const Cacas = (props) => {
+ const Cacas = (props) => {
 
   const { db } = props;
 
   const [cacas, setCacas] = useState(null);
   const [average, setAverage] = useState(null);
   const [total, setTotal] = useState(0);
+
+
+  const averageCacas = useCallback(() => {
+    if(!cacas) return;
+    const total = cacas.reduce((acc, caca) => {
+        return acc + 1;
+    }, 0);
+    const average = total / cacas.length;
+    return average;
+  }, [cacas]);
+
 
   useEffect(() => {
     if(db) getCacas(db).then(data => setCacas(data));
@@ -21,16 +32,8 @@ export const Cacas = (props) => {
   }, [db]);
 
   useEffect(() => {
-    const averageCacas = () => {
-      if(!cacas) return;
-      const total = cacas.reduce((acc, caca) => {
-          return acc + 1;
-      }, 0);
-      const average = total / cacas.length;
-      return average;
-    }
     setAverage(averageCacas());
-  }, [cacas]);
+  }, [cacas, averageCacas]);
 
       /**
    *  Eliminate caca
@@ -142,3 +145,5 @@ export const Cacas = (props) => {
     </>
     );
   }
+
+  export default Cacas;

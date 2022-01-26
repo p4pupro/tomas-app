@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 import { collection, getDocs, setDoc, query, orderBy, deleteDoc, doc, Timestamp } from 'firebase/firestore';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBaby } from '@fortawesome/free-solid-svg-icons';
 import { TableAltura } from '../../components/Table/TableAltura';
 import '../../App.css';
 
-export const Altura = (props) => {
+const Altura = (props) => {
 
   const { db } = props;
 
@@ -16,26 +16,27 @@ export const Altura = (props) => {
 
   const iconBaby = <FontAwesomeIcon icon={faBaby} size={sizeIcon} />
 
+  const calculateSizeIcon = useCallback(() => {
+    if (!size) return;
+
+    if (size > 70 && size <= 90) {
+      return '5x';
+    } if(size > 60 && size <= 70) {
+      return '4x';
+    } if(size > 50 && size <= 60) {
+      return '3x';
+    } else {
+      return'2x';
+    }
+  }, [size]);
+
   useEffect(() => {
     if(db) getAlturas(db).then(data => setAlturas(data));
   }, [db]);
 
-  useEffect(() => {
-    const calculateSizeIcon = () => {
-      if (!size) return;
-  
-      if (size > 70 && size <= 90) {
-        return '5x';
-      } if(size > 60 && size <= 70) {
-        return '4x';
-      } if(size > 50 && size <= 60) {
-        return '3x';
-      } else {
-        return'2x';
-      }
-    }
+  useEffect(() => {  
     setSizeIcon(calculateSizeIcon());
-  }, [size]);
+  }, [size, calculateSizeIcon]);
 
 
       /**
@@ -113,3 +114,5 @@ export const Altura = (props) => {
     </>
     );
   }
+
+  export default Altura;
