@@ -25,6 +25,21 @@ export const Tomas = (props) => {
     const [tomaTime, setTomaTime] = useState(null);
 
 
+
+     /**
+   * Get All Documents order by date and time
+   * @returns 
+   */
+  const getTomas = useCallback(async () => {
+    if (!db) return;
+    const tomasCol = collection(db, 'tomas-v1/');
+    // const q = query(tomasCol, orderBy("dateEnd", "desc"), orderBy("timeStampEnd", "desc"));
+    const q = query(tomasCol, orderBy("timeStampStart", "desc"));
+    const tomaSnapshot = await getDocs(q);
+    const tomaList = tomaSnapshot.docs.map(doc => doc.data());
+    return tomaList;
+  }, [db]);
+
     /**
    * Calculate average of tits
    * @returns averageTits
@@ -58,10 +73,9 @@ export const Tomas = (props) => {
   }, [tomas]);
 
 
-
-    useEffect(() => {
-        if(db) getTomas(db).then(data => setTomas(data));
-      }, [db]);
+      useEffect(() => {
+        getTomas().then(data => setTomas(data));
+      }, [getTomas]);
     
       useEffect(() => {
         averageTomas().then(avg => setAverage(avg));
@@ -123,19 +137,7 @@ export const Tomas = (props) => {
     getTomas(db).then(data => setTomas(data));
   }
 
-  /**
-   * Get All Documents order by date and time
-   * @param {*} db 
-   * @returns 
-   */
-  const getTomas = async (db) => {
-    const tomasCol = collection(db, 'tomas-v1/');
-    // const q = query(tomasCol, orderBy("dateEnd", "desc"), orderBy("timeStampEnd", "desc"));
-    const q = query(tomasCol, orderBy("timeStampStart", "desc"));
-    const tomaSnapshot = await getDocs(q);
-    const tomaList = tomaSnapshot.docs.map(doc => doc.data());
-    return tomaList;
-  }
+ 
 
   
 return (
