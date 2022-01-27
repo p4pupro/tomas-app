@@ -30,3 +30,8 @@
     color: #ffffff;
     text-decoration: none;
 }
+.is-active {
+    pointer-events: none;
+    font-weight: bold;
+    color: #58266b;
+}

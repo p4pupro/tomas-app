@@ -1,5 +1,5 @@
 import './header.css';
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const Header = () => {
 
@@ -8,19 +8,19 @@ export const Header = () => {
             <h1 className="header-title">Baby Dan</h1>
             <div className="header-buttons-container">
                 <div className="header-button">
-                    <Link to="tomas-app/" className="link-text">Tomas</Link>
+                    <NavLink to="tomas-app/" className={ ({isActive}) => { return isActive ? 'is-active link-text' : 'link-text' }}>Tomas</NavLink>
                 </div>
                 <div className="header-button">
-                    <Link to="tomas-app/cacas" className="link-text">Cacas</Link>
+                    <NavLink to="tomas-app/cacas" className={ ({isActive}) => isActive ? 'is-active link-text' : 'link-text'}>Cacas</NavLink>
                 </div>
                 <div className="header-button">
-                    <Link to="tomas-app/pis" className="link-text">Pis</Link>
+                    <NavLink to="tomas-app/pis" className={ ({isActive}) => isActive ? 'is-active link-text' : 'link-text'}>Pis</NavLink>
                 </div>
                 <div className="header-button">
-                    <Link to="tomas-app/peso" className="link-text">Peso</Link>
+                    <NavLink to="tomas-app/peso" className={ ({isActive}) => isActive ? 'is-active link-text' : 'link-text'}>Peso</NavLink>
                 </div>
                 <div className="header-button">
-                    <Link to="tomas-app/altura" className="link-text">Altura</Link>
+                    <NavLink to="tomas-app/altura" className={ ({isActive}) => isActive ? 'is-active link-text' : 'link-text'}>Altura</NavLink>
                 </div>
             </div>
         </div>

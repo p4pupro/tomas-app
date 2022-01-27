@@ -1,6 +1,6 @@
 
 import { Formik, Field } from 'formik';
-import { useEffect, Suspense, lazy, useCallback, useState } from 'react';
+import { useEffect, Suspense, lazy, useCallback, useState, useRef } from 'react';
 import { Table } from '../../components/Table/Table';
 
 import { collection, getDocs, setDoc, query, orderBy, deleteDoc, doc, Timestamp, updateDoc } from 'firebase/firestore' 
@@ -24,6 +24,8 @@ export const Tomas = (props) => {
     const [isTomaActive, setIsTomaActive] = useState(false);
     const [tomaId, setTomaId] = useState(null);
     const [tomaTime, setTomaTime] = useState(null);
+
+    const cache = useRef({})
 
     /**
    * Calculate average of tits
