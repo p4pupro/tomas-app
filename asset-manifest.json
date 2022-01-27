@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/tomas-app/static/css/main.e964888e.css",
-    "main.js": "/tomas-app/static/js/main.779fe64e.js",
+    "main.css": "/tomas-app/static/css/main.0da75924.css",
+    "main.js": "/tomas-app/static/js/main.bacabea6.js",
     "static/js/405.aec46a96.chunk.js": "/tomas-app/static/js/405.aec46a96.chunk.js",
     "static/js/201.5fb4df4e.chunk.js": "/tomas-app/static/js/201.5fb4df4e.chunk.js",
     "static/js/653.1a50434f.chunk.js": "/tomas-app/static/js/653.1a50434f.chunk.js",
@@ -9,8 +9,8 @@
     "static/js/787.f0c70ff2.chunk.js": "/tomas-app/static/js/787.f0c70ff2.chunk.js",
     "service-worker.js": "/tomas-app/service-worker.js",
     "index.html": "/tomas-app/index.html",
-    "main.e964888e.css.map": "/tomas-app/static/css/main.e964888e.css.map",
-    "main.779fe64e.js.map": "/tomas-app/static/js/main.779fe64e.js.map",
+    "main.0da75924.css.map": "/tomas-app/static/css/main.0da75924.css.map",
+    "main.bacabea6.js.map": "/tomas-app/static/js/main.bacabea6.js.map",
     "405.aec46a96.chunk.js.map": "/tomas-app/static/js/405.aec46a96.chunk.js.map",
     "201.5fb4df4e.chunk.js.map": "/tomas-app/static/js/201.5fb4df4e.chunk.js.map",
     "653.1a50434f.chunk.js.map": "/tomas-app/static/js/653.1a50434f.chunk.js.map",
@@ -18,7 +18,7 @@
     "787.f0c70ff2.chunk.js.map": "/tomas-app/static/js/787.f0c70ff2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e964888e.css",
-    "static/js/main.779fe64e.js"
+    "static/css/main.0da75924.css",
+    "static/js/main.bacabea6.js"
   ]
 }
