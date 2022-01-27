@@ -1,5 +1,5 @@
 import './header.css';
-import { NavLink } from "react-router-dom";
+import { NavLink } from '../NavLink/NavLink';
 
 export const Header = () => {
 
@@ -8,19 +8,19 @@ export const Header = () => {
             <h1 className="header-title">Baby Dan</h1>
             <div className="header-buttons-container">
                 <div className="header-button">
-                    <NavLink to="tomas-app/" className={ ({isActive}) => { return isActive ? 'is-active link-text' : 'link-text' }}>Tomas</NavLink>
+                    <NavLink to="tomas-app/">Tomas</NavLink>
                 </div>
                 <div className="header-button">
-                    <NavLink to="tomas-app/cacas" className={ ({isActive}) => isActive ? 'is-active link-text' : 'link-text'}>Cacas</NavLink>
+                    <NavLink to="tomas-app/cacas">Cacas</NavLink>
                 </div>
                 <div className="header-button">
-                    <NavLink to="tomas-app/pis" className={ ({isActive}) => isActive ? 'is-active link-text' : 'link-text'}>Pis</NavLink>
+                    <NavLink to="tomas-app/pis">Pis</NavLink>
                 </div>
                 <div className="header-button">
-                    <NavLink to="tomas-app/peso" className={ ({isActive}) => isActive ? 'is-active link-text' : 'link-text'}>Peso</NavLink>
+                    <NavLink to="tomas-app/peso">Peso</NavLink>
                 </div>
                 <div className="header-button">
-                    <NavLink to="tomas-app/altura" className={ ({isActive}) => isActive ? 'is-active link-text' : 'link-text'}>Altura</NavLink>
+                    <NavLink to="tomas-app/altura">Altura</NavLink>
                 </div>
             </div>
         </div>

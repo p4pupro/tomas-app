@@ -1,0 +1,10 @@
+.is-active {
+    pointer-events: none;
+    font-weight: bold;
+    color: #58266b;
+}
+
+.link-text {
+    color: #ffffff;
+    text-decoration: none;
+}
