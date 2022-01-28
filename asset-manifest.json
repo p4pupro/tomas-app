@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.css": "/tomas-app/static/css/main.eebef8ef.css",
-    "main.js": "/tomas-app/static/js/main.55fe8b7c.js",
+    "main.css": "/tomas-app/static/css/main.20afad9d.css",
+    "main.js": "/tomas-app/static/js/main.572f08af.js",
     "static/css/405.c3f4bc41.chunk.css": "/tomas-app/static/css/405.c3f4bc41.chunk.css",
     "static/js/405.e81c444e.chunk.js": "/tomas-app/static/js/405.e81c444e.chunk.js",
     "static/css/201.c3f4bc41.chunk.css": "/tomas-app/static/css/201.c3f4bc41.chunk.css",
-    "static/js/201.4dfe16e4.chunk.js": "/tomas-app/static/js/201.4dfe16e4.chunk.js",
+    "static/js/201.7cae5568.chunk.js": "/tomas-app/static/js/201.7cae5568.chunk.js",
     "static/css/653.c3f4bc41.chunk.css": "/tomas-app/static/css/653.c3f4bc41.chunk.css",
     "static/js/653.cc8ef6f1.chunk.js": "/tomas-app/static/js/653.cc8ef6f1.chunk.js",
     "static/css/119.c3f4bc41.chunk.css": "/tomas-app/static/css/119.c3f4bc41.chunk.css",
@@ -15,12 +15,12 @@
     "static/js/787.f0c70ff2.chunk.js": "/tomas-app/static/js/787.f0c70ff2.chunk.js",
     "service-worker.js": "/tomas-app/service-worker.js",
     "index.html": "/tomas-app/index.html",
-    "main.eebef8ef.css.map": "/tomas-app/static/css/main.eebef8ef.css.map",
-    "main.55fe8b7c.js.map": "/tomas-app/static/js/main.55fe8b7c.js.map",
+    "main.20afad9d.css.map": "/tomas-app/static/css/main.20afad9d.css.map",
+    "main.572f08af.js.map": "/tomas-app/static/js/main.572f08af.js.map",
     "405.c3f4bc41.chunk.css.map": "/tomas-app/static/css/405.c3f4bc41.chunk.css.map",
     "405.e81c444e.chunk.js.map": "/tomas-app/static/js/405.e81c444e.chunk.js.map",
     "201.c3f4bc41.chunk.css.map": "/tomas-app/static/css/201.c3f4bc41.chunk.css.map",
-    "201.4dfe16e4.chunk.js.map": "/tomas-app/static/js/201.4dfe16e4.chunk.js.map",
+    "201.7cae5568.chunk.js.map": "/tomas-app/static/js/201.7cae5568.chunk.js.map",
     "653.c3f4bc41.chunk.css.map": "/tomas-app/static/css/653.c3f4bc41.chunk.css.map",
     "653.cc8ef6f1.chunk.js.map": "/tomas-app/static/js/653.cc8ef6f1.chunk.js.map",
     "119.c3f4bc41.chunk.css.map": "/tomas-app/static/css/119.c3f4bc41.chunk.css.map",
@@ -30,7 +30,7 @@
     "787.f0c70ff2.chunk.js.map": "/tomas-app/static/js/787.f0c70ff2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.eebef8ef.css",
-    "static/js/main.55fe8b7c.js"
+    "static/css/main.20afad9d.css",
+    "static/js/main.572f08af.js"
   ]
 }
