@@ -39,7 +39,7 @@ const Pis = (props) => {
    * @param {*} id 
    */
        const handleDelete = async (id) => {
-        await deleteDoc(doc(db, "pis-v1", id));
+        await deleteDoc(doc(db, "pis-v1/", id));
         getPis(db).then(data => setPis(data));
       }
     

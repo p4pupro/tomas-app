@@ -155,7 +155,8 @@ return (
               writeTomaData(values);
               setSubmitting(false);
               setIsTomaActive(!isTomaActive);
-              resetForm();
+              console.log(isTomaActive, !isTomaActive, !!isTomaActive);
+              isTomaActive && resetForm();
             }}
       >
         {({
