@@ -84,6 +84,7 @@ const Peso = (props) => {
         setIsSubmitting(false);
         savePeso(weight);
         setIsSubmitting(false);
+        setWeight(1);
       }
 
 

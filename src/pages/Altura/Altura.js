@@ -84,6 +84,7 @@ const Altura = (props) => {
         setIsSubmitting(false);
         saveAltura(size);
         setIsSubmitting(false);
+        setSize(40);
       }
 
 

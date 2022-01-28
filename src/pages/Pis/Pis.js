@@ -47,12 +47,12 @@ const Pis = (props) => {
        * Set doc
        * @param {*} param0 
        */
-      const savePis = async ({ color }) => {
+      const savePis = async ({ amount }) => {
           const id = crypto.randomUUID();
           await setDoc(doc(db, "pis-v1/", id), {
             id, 
             date: new Date().toLocaleDateString("es-ES"),
-            color,
+            amount,
             time: new Date().toLocaleTimeString(),
             timeStamp: Timestamp.now()
           }); 
@@ -89,17 +89,18 @@ const Pis = (props) => {
     return (
       <>
         <Formik
-          initialValues={{ color: ''}}
+          initialValues={{ amount: ''}}
           validate={values => {
             const errors = {};
-            if (!values.color) {
-              errors.color = 'Required';
+            if (!values.amount) {
+              errors.amount = 'Required';
             }
             return errors;
           }}
-          onSubmit={(values, { setSubmitting }) => {
+          onSubmit={(values, { setSubmitting, resetForm }) => {
             savePis(values);
             setSubmitting(false);
+            resetForm();
           }}
         >
           {({
@@ -111,19 +112,19 @@ const Pis = (props) => {
           
             <div className="col-s-12 col-xs-12" role="group" aria-labelledby="radio-tit">
               <div id="radio-tit">Orina</div>
-              <label htmlFor="color" className='col-xs-12 col-s-6'>
-                Transparente 
-                <Field type="radio" name="color" value="normal" className="col-xs-6 col-s-6 pis"  /> 
+              <label htmlFor="amount" className='col-xs-12 col-s-6'>
+                Poco
+                <Field type="radio" name="amount" value="poco" className="col-xs-6 col-s-6 pis"  /> 
               </label>      
-              <label htmlFor="color" className='col-xs-12 col-s-6'>
-                Amarilla
-                <Field type="radio" name="color" value="yellow" className="col-xs-6 col-s-6 pis" />
+              <label htmlFor="amount" className='col-xs-12 col-s-6'>
+                Mucho
+                <Field type="radio" name="amount" value="mucho" className="col-xs-6 col-s-6 pis" />
               </label>
               
             </div>
 
-              {errors.color && (
-                <span className="error">{errors.color}</span>
+              {errors.amount && (
+                <span className="error">{errors.amount}</span>
               )}
             
             <button type="submit" className="button-register" disabled={isSubmitting}>

@@ -30,74 +30,74 @@ export const Tomas = (props) => {
    * Get All Documents order by date and time
    * @returns 
    */
-  const getTomas = useCallback(async () => {
-    if (!db) return;
-    const tomasCol = collection(db, 'tomas-v1/');
-    // const q = query(tomasCol, orderBy("dateEnd", "desc"), orderBy("timeStampEnd", "desc"));
-    const q = query(tomasCol, orderBy("timeStampStart", "desc"));
-    const tomaSnapshot = await getDocs(q);
-    const tomaList = tomaSnapshot.docs.map(doc => doc.data());
-    return tomaList;
-  }, [db]);
+    const getTomas = useCallback(async () => {
+      if (!db) return;
+      const tomasCol = collection(db, 'tomas-v1/');
+      // const q = query(tomasCol, orderBy("dateEnd", "desc"), orderBy("timeStampEnd", "desc"));
+      const q = query(tomasCol, orderBy("timeStampStart", "desc"));
+      const tomaSnapshot = await getDocs(q);
+      const tomaList = tomaSnapshot.docs.map(doc => doc.data());
+      return tomaList;
+    }, [db]);
 
     /**
-   * Calculate average of tits
-   * @returns averageTits
-   */
-  const averageTits = useCallback(async () => { 
-    if(!tomas) return;
-    const withTimestamp = tomas.filter(toma => toma.timeStampEnd > 0);
-    const leftTits = withTimestamp.filter(toma => toma.tit === 'izquierdo');
-    const rightTits = withTimestamp.filter(toma => toma.tit === 'derecho');
-    const totalLeftTits = leftTits.length;
-    const totalRightTits = rightTits.length;
-    const sumTotal = totalLeftTits + totalRightTits;
-    const percentLeft = totalLeftTits / sumTotal * 100;
-    const percentRight = totalRightTits / sumTotal * 100;
-    const result = [percentLeft, percentRight];
-    return result;
-  }, [tomas]);
+    * Calculate average of tits
+    * @returns averageTits
+    */
+    const averageTits = useCallback(async () => { 
+      if(!tomas) return;
+      const withTimestamp = tomas.filter(toma => toma.timeStampEnd > 0);
+      const leftTits = withTimestamp.filter(toma => toma.tit === 'izquierdo');
+      const rightTits = withTimestamp.filter(toma => toma.tit === 'derecho');
+      const totalLeftTits = leftTits.length;
+      const totalRightTits = rightTits.length;
+      const sumTotal = totalLeftTits + totalRightTits;
+      const percentLeft = totalLeftTits / sumTotal * 100;
+      const percentRight = totalRightTits / sumTotal * 100;
+      const result = [percentLeft, percentRight];
+      return result;
+    }, [tomas]);
 
-  /**
-   * Calculate average
-   * @returns average
-   */
-   const averageTomas = useCallback(async () => {
-    if(!tomas) return 0;
-    const withTimestamp = tomas.filter(toma => toma.timeStampEnd > 0);
-    const total = withTimestamp.length;
-    const tomasRest = withTimestamp.map(toma => toma.timeStampEnd.toMillis() - toma.timeStampStart.toMillis());
-    const tomasSum = tomasRest.reduce((acc, cur) => acc + cur);
-    const resultDate = new Date(Math.abs(tomasSum) / total);
-    return resultDate.toLocaleTimeString();
-  }, [tomas]);
+    /**
+     * Calculate average
+     * @returns average
+     */
+    const averageTomas = useCallback(async () => {
+      if(!tomas) return 0;
+      const withTimestamp = tomas.filter(toma => toma.timeStampEnd > 0);
+      const total = withTimestamp.length;
+      const tomasRest = withTimestamp.map(toma => toma.timeStampEnd.toMillis() - toma.timeStampStart.toMillis());
+      const tomasSum = tomasRest.reduce((acc, cur) => acc + cur);
+      const resultDate = new Date(Math.abs(tomasSum) / total);
+      return resultDate.toLocaleTimeString();
+    }, [tomas]);
 
 
-      useEffect(() => {
-        getTomas().then(data => setTomas(data));
-      }, [getTomas]);
+    useEffect(() => {
+      getTomas().then(data => setTomas(data));
+    }, [getTomas]);
     
-      useEffect(() => {
-        averageTomas().then(avg => setAverage(avg));
-      }, [tomas, averageTomas]);
+    useEffect(() => {
+      averageTomas().then(avg => setAverage(avg));
+    }, [tomas, averageTomas]);
     
-      useEffect(() => {
-        averageTits().then(avgTits => setAvgTits(avgTits));
-      }, [tomas, averageTits]);
+    useEffect(() => {
+      averageTits().then(avgTits => setAvgTits(avgTits));
+    }, [tomas, averageTits]);
     
-      useEffect(() => {
-        if (!isTomaActive && tomas) setLastTit(tomas[0].tit);
-      }, [isTomaActive, tomas]);
+    useEffect(() => {
+      if (!isTomaActive && tomas) setLastTit(tomas[0].tit);
+    }, [isTomaActive, tomas]);
     
-       useEffect(() => {
-         if (isTomaActive) setTomaTime(new Date().toLocaleTimeString());
-         if (!isTomaActive) setTomaTime(null);
-       }, [isTomaActive]);
+    useEffect(() => {
+      if (isTomaActive) setTomaTime(new Date().toLocaleTimeString());
+      if (!isTomaActive) setTomaTime(null);
+    }, [isTomaActive]);
     
     
-      useEffect(() => {
-        if (!isTomaActive && tomas) tomas[tomas.length -1].tomaTime = tomaTime;
-      }, [isTomaActive, tomas, tomaTime]);
+    useEffect(() => {
+      if (!isTomaActive && tomas) tomas[tomas.length -1].tomaTime = tomaTime;
+    }, [isTomaActive, tomas, tomaTime]);
 
       /**
    *  Eliminate toma
@@ -151,10 +151,11 @@ return (
               }
               return errors;
             }}
-            onSubmit={(values, { setSubmitting }) => {
+            onSubmit={(values, { setSubmitting, resetForm }) => {
               writeTomaData(values);
               setSubmitting(false);
               setIsTomaActive(!isTomaActive);
+              resetForm();
             }}
       >
         {({

@@ -98,9 +98,10 @@ import '../../App.css';
             }
             return errors;
           }}
-          onSubmit={(values, { setSubmitting }) => {
+          onSubmit={(values, { setSubmitting, resetForm }) => {
             saveCacas(values);
             setSubmitting(false);
+            resetForm();
           }}
         >
           {({
@@ -114,7 +115,7 @@ import '../../App.css';
               <div id="radio-tit">Caca</div>
               <label htmlFor="type" className='col-xs-12 col-s-6'>
                 Líquida 
-                <Field type="radio" name="type" value="liquid"  className="col-xs-6 col-s-6"  /> 
+                <Field type="radio" name="type" value="liquida"  className="col-xs-6 col-s-6"  /> 
               </label>      
               <label htmlFor="type" className='col-xs-12 col-s-6'>
                 Normal 
@@ -122,11 +123,11 @@ import '../../App.css';
               </label>
               <label htmlFor="type" className='col-xs-12 col-s-6'>
                 Pastosa 
-                <Field type="radio" name="type" value="hard" className="col-xs-6 col-s-6"  /> 
+                <Field type="radio" name="type" value="pastosa" className="col-xs-6 col-s-6"  /> 
               </label>
               <label htmlFor="type" className='col-xs-12 col-s-6'>
                 Dura 
-                <Field type="radio" name="type" value="hard" className="col-xs-6 col-s-6"  /> 
+                <Field type="radio" name="type" value="dura" className="col-xs-6 col-s-6"  /> 
               </label>
             </div>
 
