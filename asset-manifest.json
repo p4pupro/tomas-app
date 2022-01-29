@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/tomas-app/static/css/main.50431e30.css",
-    "main.js": "/tomas-app/static/js/main.5525b375.js",
+    "main.js": "/tomas-app/static/js/main.10c29a06.js",
     "static/css/405.c3f4bc41.chunk.css": "/tomas-app/static/css/405.c3f4bc41.chunk.css",
     "static/js/405.e81c444e.chunk.js": "/tomas-app/static/js/405.e81c444e.chunk.js",
     "static/css/201.c3f4bc41.chunk.css": "/tomas-app/static/css/201.c3f4bc41.chunk.css",
-    "static/js/201.d949afcb.chunk.js": "/tomas-app/static/js/201.d949afcb.chunk.js",
+    "static/js/201.4f2ad7ff.chunk.js": "/tomas-app/static/js/201.4f2ad7ff.chunk.js",
     "static/css/653.c3f4bc41.chunk.css": "/tomas-app/static/css/653.c3f4bc41.chunk.css",
     "static/js/653.6e377cc0.chunk.js": "/tomas-app/static/js/653.6e377cc0.chunk.js",
     "static/css/119.c3f4bc41.chunk.css": "/tomas-app/static/css/119.c3f4bc41.chunk.css",
@@ -16,11 +16,11 @@
     "service-worker.js": "/tomas-app/service-worker.js",
     "index.html": "/tomas-app/index.html",
     "main.50431e30.css.map": "/tomas-app/static/css/main.50431e30.css.map",
-    "main.5525b375.js.map": "/tomas-app/static/js/main.5525b375.js.map",
+    "main.10c29a06.js.map": "/tomas-app/static/js/main.10c29a06.js.map",
     "405.c3f4bc41.chunk.css.map": "/tomas-app/static/css/405.c3f4bc41.chunk.css.map",
     "405.e81c444e.chunk.js.map": "/tomas-app/static/js/405.e81c444e.chunk.js.map",
     "201.c3f4bc41.chunk.css.map": "/tomas-app/static/css/201.c3f4bc41.chunk.css.map",
-    "201.d949afcb.chunk.js.map": "/tomas-app/static/js/201.d949afcb.chunk.js.map",
+    "201.4f2ad7ff.chunk.js.map": "/tomas-app/static/js/201.4f2ad7ff.chunk.js.map",
     "653.c3f4bc41.chunk.css.map": "/tomas-app/static/css/653.c3f4bc41.chunk.css.map",
     "653.6e377cc0.chunk.js.map": "/tomas-app/static/js/653.6e377cc0.chunk.js.map",
     "119.c3f4bc41.chunk.css.map": "/tomas-app/static/css/119.c3f4bc41.chunk.css.map",
@@ -31,6 +31,6 @@
   },
   "entrypoints": [
     "static/css/main.50431e30.css",
-    "static/js/main.5525b375.js"
+    "static/js/main.10c29a06.js"
   ]
 }
