@@ -3,6 +3,7 @@ import { collection, getDocs, setDoc, query, orderBy, deleteDoc, doc, Timestamp 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBaby } from '@fortawesome/free-solid-svg-icons';
 import { TablePeso } from '../../components/Table/TablePeso';
+import { generateUUID } from '../../utils/generateUUID';
 import '../../App.css';
 
 const Peso = (props) => {
@@ -53,7 +54,7 @@ const Peso = (props) => {
        * @param {*} param0 
        */
       const savePeso = async (weight) => {
-          const id = crypto.randomUUID();
+          const id = generateUUID();
           await setDoc(doc(db, "peso-v1/", id), {
             id, 
             date: new Date().toLocaleDateString("es-ES"),

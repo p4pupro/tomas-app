@@ -2,6 +2,7 @@ import { useEffect, useCallback, useState } from 'react';
 import { Formik, Field } from 'formik';
 import { collection, getDocs, setDoc, query, orderBy, deleteDoc, doc, Timestamp, where } from 'firebase/firestore';
 import { TableCaca } from '../../components/Table/TableCaca';
+import { generateUUID } from '../../utils/generateUUID';
 import '../../App.css';
 
  const Cacas = (props) => {
@@ -49,7 +50,7 @@ import '../../App.css';
        * @param {*} param0 
        */
       const saveCacas = async ({ type }) => {
-          const id = crypto.randomUUID();
+          const id = generateUUID();
           await setDoc(doc(db, "cacas-v1/", id), {
             id, 
             date: new Date().toLocaleDateString("es-ES"),

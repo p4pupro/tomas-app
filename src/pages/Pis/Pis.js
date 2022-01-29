@@ -2,6 +2,7 @@ import { useEffect, useCallback, useState } from 'react';
 import { Formik, Field } from 'formik';
 import { collection, getDocs, setDoc, query, orderBy, deleteDoc, doc, Timestamp, where } from 'firebase/firestore';
 import { TablePis } from '../../components/Table/TablePis';
+import { generateUUID } from '../../utils/generateUUID';
 import '../../App.css';
 
 const Pis = (props) => {
@@ -48,8 +49,7 @@ const Pis = (props) => {
        * @param {*} param0 
        */
       const savePis = async ({ amount }) => {
-          const id = crypto.randomUUID();
-          console.log(amount, id, db);
+          const id = generateUUID();
           await setDoc(doc(db, "pis-v1/", id), {
             id, 
             date: new Date().toLocaleDateString("es-ES"),
@@ -57,9 +57,7 @@ const Pis = (props) => {
             time: new Date().toLocaleTimeString(),
             timeStamp: Timestamp.now()
           });
-          console.log( 'se inserto! ', amount, id, db);
-        getPis(db).then(data => setPis(data));
-        console.log(pis)
+        getPis(db).then(data => setPis(data));  
       }
     
       /**

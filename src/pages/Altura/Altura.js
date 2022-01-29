@@ -3,6 +3,7 @@ import { collection, getDocs, setDoc, query, orderBy, deleteDoc, doc, Timestamp 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBaby } from '@fortawesome/free-solid-svg-icons';
 import { TableAltura } from '../../components/Table/TableAltura';
+import { generateUUID } from '../../utils/generateUUID';
 import '../../App.css';
 
 const Altura = (props) => {
@@ -54,7 +55,7 @@ const Altura = (props) => {
        * @param {*} param0 
        */
       const saveAltura = async (size) => {
-          const id = crypto.randomUUID();
+          const id = generateUUID();
           await setDoc(doc(db, "altura-v1/", id), {
             id, 
             date: new Date().toLocaleDateString("es-ES"),
