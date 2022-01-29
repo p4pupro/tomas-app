@@ -49,14 +49,17 @@ const Pis = (props) => {
        */
       const savePis = async ({ amount }) => {
           const id = crypto.randomUUID();
+          console.log(amount, id, db);
           await setDoc(doc(db, "pis-v1/", id), {
             id, 
             date: new Date().toLocaleDateString("es-ES"),
             amount,
             time: new Date().toLocaleTimeString(),
             timeStamp: Timestamp.now()
-          }); 
+          });
+          console.log( 'se inserto! ', amount, id, db);
         getPis(db).then(data => setPis(data));
+        console.log(pis)
       }
     
       /**
@@ -98,6 +101,7 @@ const Pis = (props) => {
             return errors;
           }}
           onSubmit={(values, { setSubmitting, resetForm }) => {
+            console.log(values);
             savePis(values);
             setSubmitting(false);
             resetForm();
