@@ -1,36 +1,36 @@
 {
   "files": {
     "main.css": "/tomas-app/static/css/main.50431e30.css",
-    "main.js": "/tomas-app/static/js/main.10c29a06.js",
+    "main.js": "/tomas-app/static/js/main.234a44e6.js",
     "static/css/405.c3f4bc41.chunk.css": "/tomas-app/static/css/405.c3f4bc41.chunk.css",
-    "static/js/405.e81c444e.chunk.js": "/tomas-app/static/js/405.e81c444e.chunk.js",
+    "static/js/405.1236ef0c.chunk.js": "/tomas-app/static/js/405.1236ef0c.chunk.js",
     "static/css/201.c3f4bc41.chunk.css": "/tomas-app/static/css/201.c3f4bc41.chunk.css",
-    "static/js/201.4f2ad7ff.chunk.js": "/tomas-app/static/js/201.4f2ad7ff.chunk.js",
+    "static/js/201.7fe1c87a.chunk.js": "/tomas-app/static/js/201.7fe1c87a.chunk.js",
     "static/css/653.c3f4bc41.chunk.css": "/tomas-app/static/css/653.c3f4bc41.chunk.css",
-    "static/js/653.6e377cc0.chunk.js": "/tomas-app/static/js/653.6e377cc0.chunk.js",
+    "static/js/653.85ae4030.chunk.js": "/tomas-app/static/js/653.85ae4030.chunk.js",
     "static/css/119.c3f4bc41.chunk.css": "/tomas-app/static/css/119.c3f4bc41.chunk.css",
-    "static/js/119.5deaa2ea.chunk.js": "/tomas-app/static/js/119.5deaa2ea.chunk.js",
+    "static/js/119.8fe028a9.chunk.js": "/tomas-app/static/js/119.8fe028a9.chunk.js",
     "static/css/339.c3f4bc41.chunk.css": "/tomas-app/static/css/339.c3f4bc41.chunk.css",
     "static/js/339.d52d8a75.chunk.js": "/tomas-app/static/js/339.d52d8a75.chunk.js",
     "static/js/787.f0c70ff2.chunk.js": "/tomas-app/static/js/787.f0c70ff2.chunk.js",
     "service-worker.js": "/tomas-app/service-worker.js",
     "index.html": "/tomas-app/index.html",
     "main.50431e30.css.map": "/tomas-app/static/css/main.50431e30.css.map",
-    "main.10c29a06.js.map": "/tomas-app/static/js/main.10c29a06.js.map",
+    "main.234a44e6.js.map": "/tomas-app/static/js/main.234a44e6.js.map",
     "405.c3f4bc41.chunk.css.map": "/tomas-app/static/css/405.c3f4bc41.chunk.css.map",
-    "405.e81c444e.chunk.js.map": "/tomas-app/static/js/405.e81c444e.chunk.js.map",
+    "405.1236ef0c.chunk.js.map": "/tomas-app/static/js/405.1236ef0c.chunk.js.map",
     "201.c3f4bc41.chunk.css.map": "/tomas-app/static/css/201.c3f4bc41.chunk.css.map",
-    "201.4f2ad7ff.chunk.js.map": "/tomas-app/static/js/201.4f2ad7ff.chunk.js.map",
+    "201.7fe1c87a.chunk.js.map": "/tomas-app/static/js/201.7fe1c87a.chunk.js.map",
     "653.c3f4bc41.chunk.css.map": "/tomas-app/static/css/653.c3f4bc41.chunk.css.map",
-    "653.6e377cc0.chunk.js.map": "/tomas-app/static/js/653.6e377cc0.chunk.js.map",
+    "653.85ae4030.chunk.js.map": "/tomas-app/static/js/653.85ae4030.chunk.js.map",
     "119.c3f4bc41.chunk.css.map": "/tomas-app/static/css/119.c3f4bc41.chunk.css.map",
-    "119.5deaa2ea.chunk.js.map": "/tomas-app/static/js/119.5deaa2ea.chunk.js.map",
+    "119.8fe028a9.chunk.js.map": "/tomas-app/static/js/119.8fe028a9.chunk.js.map",
     "339.c3f4bc41.chunk.css.map": "/tomas-app/static/css/339.c3f4bc41.chunk.css.map",
     "339.d52d8a75.chunk.js.map": "/tomas-app/static/js/339.d52d8a75.chunk.js.map",
     "787.f0c70ff2.chunk.js.map": "/tomas-app/static/js/787.f0c70ff2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.50431e30.css",
-    "static/js/main.10c29a06.js"
+    "static/js/main.234a44e6.js"
   ]
 }
