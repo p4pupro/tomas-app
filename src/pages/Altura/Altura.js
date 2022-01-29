@@ -3,7 +3,7 @@ import { collection, getDocs, setDoc, query, orderBy, deleteDoc, doc, Timestamp 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBaby } from '@fortawesome/free-solid-svg-icons';
 import { TableAltura } from '../../components/Table/TableAltura';
-import { generateUUID } from '../../utils/generateUUID';
+import { generateUUID } from '../../utils/utils';
 import '../../App.css';
 
 const Altura = (props) => {

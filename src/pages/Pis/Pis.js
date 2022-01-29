@@ -2,7 +2,7 @@ import { useEffect, useCallback, useState } from 'react';
 import { Formik, Field } from 'formik';
 import { collection, getDocs, setDoc, query, orderBy, deleteDoc, doc, Timestamp, where } from 'firebase/firestore';
 import { TablePis } from '../../components/Table/TablePis';
-import { generateUUID } from '../../utils/generateUUID';
+import { generateUUID } from '../../utils/utils';
 import '../../App.css';
 
 const Pis = (props) => {

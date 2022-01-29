@@ -2,7 +2,7 @@ import { useEffect, useCallback, useState } from 'react';
 import { Formik, Field } from 'formik';
 import { collection, getDocs, setDoc, query, orderBy, deleteDoc, doc, Timestamp, where } from 'firebase/firestore';
 import { TableCaca } from '../../components/Table/TableCaca';
-import { generateUUID } from '../../utils/generateUUID';
+import { generateUUID } from '../../utils/utils';
 import '../../App.css';
 
  const Cacas = (props) => {
