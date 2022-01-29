@@ -91,7 +91,7 @@ const Peso = (props) => {
     return (
       <>
         <form>   
-          <div className="col-s-12 col-xs-12" role="group" aria-labelledby="radio-tit">
+          <div className="col-s-12 col-xs-12" style={{ width: '100%' }} role="group" aria-labelledby="radio-tit">
             <div id="radio-tit">Peso</div>
             <label id="weight-peso" htmlFor="peso" className='col-xs-12 col-s-12'>
               { weight === 1 ? `${ weight } Kg` : `${ weight } Kgs` }

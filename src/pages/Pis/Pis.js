@@ -110,7 +110,7 @@ const Pis = (props) => {
           }) => (
           <form onSubmit={handleSubmit}>
           
-            <div className="col-s-12 col-xs-12" role="group" aria-labelledby="radio-tit">
+            <div className="col-s-12 col-xs-12" style={{ width: '100%' }} role="group" aria-labelledby="radio-tit">
               <div id="radio-tit">Orina</div>
               <label htmlFor="amount" className='col-xs-12 col-s-6'>
                 Poco

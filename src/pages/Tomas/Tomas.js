@@ -4,7 +4,7 @@ import { useEffect, Suspense, lazy, useCallback, useState } from 'react';
 
 import { collection, getDocs, setDoc, query, orderBy, deleteDoc, doc, Timestamp, updateDoc } from 'firebase/firestore' 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBaby } from '@fortawesome/free-solid-svg-icons'
+import { faBaby, faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
 import { generateUniqSerial, opositeTit, capitalize } from '../../utils/utils';
 import '../../App.css';
 
@@ -15,6 +15,7 @@ export const Tomas = (props) => {
 
     const { db } = props;
     const iconBaby = <FontAwesomeIcon icon={faBaby} size="3x" />
+    const iconRemeber = <FontAwesomeIcon icon={faExclamationCircle} size="2x" />
 
     const [tomas, setTomas] = useState(null);
     const [average, setAverage] = useState(null);
@@ -166,7 +167,7 @@ return (
         }) => (
           <form onSubmit={handleSubmit}>
            
-            <div className="col-s-12 col-xs-12" role="group" aria-labelledby="radio-tit">
+            <div className="col-s-12 col-xs-12" style={{ width: '100%'}} role="group" aria-labelledby="radio-tit">
             <div id="radio-tit">Pecho</div>      
               <label htmlFor="tit" className='col-xs-12 col-s-6'>
               Izquierdo 
@@ -183,6 +184,7 @@ return (
             </div>
 
             { !isTomaActive && (
+              iconRemeber,
                 <div className='col-xs-12 col-s-12'>
                   <span>
                     El último pecho fue 

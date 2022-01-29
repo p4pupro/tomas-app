@@ -15,6 +15,7 @@ const Altura = (props) => {
   const [size, setSize] = useState(40);
 
   const iconBaby = <FontAwesomeIcon icon={faBaby} size={sizeIcon} />
+  
 
   const calculateSizeIcon = useCallback(() => {
     if (!size) return;
@@ -92,7 +93,7 @@ const Altura = (props) => {
       <>
           <form>
           
-            <div className="col-s-12 col-xs-12" role="group" aria-labelledby="radio-tit">
+            <div className="col-s-12 col-xs-12" style={{ width: '100%' }} role="group" aria-labelledby="radio-tit">
               <div id="radio-tit">Altura</div>
               <label id="weight-peso" htmlFor="altura" className='col-xs-12 col-s-12'>
                { size } Cms
