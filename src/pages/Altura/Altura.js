@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBaby } from '@fortawesome/free-solid-svg-icons';
 import { TableAltura } from '../../components/Table/TableAltura';
 import { generateUUID } from '../../utils/utils';
+import { motion } from "framer-motion";
 import '../../App.css';
 
 const Altura = (props) => {
@@ -98,7 +99,7 @@ const Altura = (props) => {
               <div id="radio-tit">Altura</div>
               <label id="weight-peso" htmlFor="altura" className='col-xs-12 col-s-12'>
                { size } Cms
-                <input type="range" name="altura" min="40" max="90" step="1" onChange={handleChange} value={size.toString()} id="weight-input" className="col-xs-12 col-s-12"  /> 
+                <input type="range" name="altura" min="40" max="90" step="1" onChange={handleChange} value={size.toString()} id="weight-input"   /> 
               </label> 
               
               {  
@@ -107,10 +108,17 @@ const Altura = (props) => {
                 </div>
               }
             </div>
-            
-            <button type="submit" className="button-register" onClick={handleSubmit} disabled={isSubmitting}>
-              Registrar Altura
-            </button>
+
+            <motion.button
+              type="submit" 
+              className="button-register" 
+              onClick={handleSubmit} 
+              disabled={isSubmitting}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9, backgroundColor: '#00B98E' }}
+            > Registrar Altura
+            </motion.button>
+             
           </form>
 
       <TableAltura alturas={alturas} handleDelete={handleDelete} />

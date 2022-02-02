@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { motion } from "framer-motion"
 import '../Table/table.css';
 
 export const ItemPeso = (props) => {
@@ -24,7 +25,15 @@ export const ItemPeso = (props) => {
                     <td data-label="Fecha">{ date }</td>
                     <td data-label="Hora">{ time }</td>
                     <td data-label="Peso">{ weight }</td>
-                    <td data-label="Borrar"><button onClick={ () => handleDelete(id) }>{ iconDelete }</button></td>
+                    <td data-label="Borrar">
+                        <motion.button
+                            onClick={ () => handleDelete(id) }
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                        >   
+                            { iconDelete }
+                        </motion.button>
+                    </td>
                 </tr>
             </tbody>
         </>

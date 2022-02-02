@@ -6,6 +6,7 @@ import { collection, getDocs, setDoc, query, orderBy, deleteDoc, doc, Timestamp,
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBaby, faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
 import { generateUniqSerial, opositeTit, capitalize } from '../../utils/utils';
+import { motion } from "framer-motion";
 import '../../App.css';
 
 const LazyTable = lazy(() => import('../../components/Table/Table'));
@@ -208,9 +209,14 @@ return (
                 <span className="error">{errors.tit}</span>
               )}
             
-            <button type="submit" className="button-register" disabled={isSubmitting}>
-             {isTomaActive ? 'Finalizar Toma' : 'Iniciar Toma'}
-            </button>
+            <motion.button
+              type="submit" 
+              className="button-register"
+              disabled={isSubmitting}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9, backgroundColor: '#00B98E' }}
+            >  {isTomaActive ? 'Finalizar Toma' : 'Iniciar Toma'}
+            </motion.button>
           </form>
         )}
       </Formik>

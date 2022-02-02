@@ -3,6 +3,7 @@ import { Formik, Field } from 'formik';
 import { collection, getDocs, setDoc, query, orderBy, deleteDoc, doc, Timestamp, where } from 'firebase/firestore';
 import { TableCaca } from '../../components/Table/TableCaca';
 import { generateUUID } from '../../utils/utils';
+import { motion } from "framer-motion";
 import '../../App.css';
 
  const Cacas = (props) => {
@@ -136,9 +137,14 @@ import '../../App.css';
                 <span className="error">{errors.type}</span>
               )}
             
-            <button type="submit" className="button-register" disabled={isSubmitting}>
-              Registrar caca
-            </button>
+            <motion.button
+              type="submit" 
+              className="button-register" 
+              disabled={isSubmitting}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9, backgroundColor: '#00B98E' }}
+            > Registrar caca
+            </motion.button>
           </form>
         )}
       </Formik>

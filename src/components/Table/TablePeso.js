@@ -1,14 +1,34 @@
 import { ItemPeso } from '../Items/ItemPeso';
+import { motion } from "framer-motion";
 import './table.css';
 
 
 export const TablePeso = (props) => {
 
   const { peso, handleDelete } = props
+
+  const cardVariants = {
+    offscreen: {
+      y: 300
+    },
+    onscreen: {
+      y: 5,
+      transition: {
+        type: "spring",
+        bounce: 0.4,
+        duration: 0.9
+      }
+    }
+  };
   
   return (
     <div className="wrap-table">
-      <table>
+      <motion.table
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ once: true }}
+        variants={cardVariants}
+      >
         <caption>Historial</caption>
           {
             peso ? peso.map((pes, index) => {
@@ -23,7 +43,7 @@ export const TablePeso = (props) => {
           :
             <tbody></tbody>
           }  
-      </table>
+      </motion.table>
     </div>
   )
 }

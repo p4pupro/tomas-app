@@ -3,6 +3,7 @@ import { Formik, Field } from 'formik';
 import { collection, getDocs, setDoc, query, orderBy, deleteDoc, doc, Timestamp, where } from 'firebase/firestore';
 import { TablePis } from '../../components/Table/TablePis';
 import { generateUUID } from '../../utils/utils';
+import { motion } from "framer-motion";
 import '../../App.css';
 
 const Pis = (props) => {
@@ -129,9 +130,14 @@ const Pis = (props) => {
                 <span className="error">{errors.amount}</span>
               )}
             
-            <button type="submit" className="button-register" disabled={isSubmitting}>
-              Registrar Orina
-            </button>
+            <motion.button
+              type="submit" 
+              className="button-register"
+              disabled={isSubmitting}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9, backgroundColor: '#00B98E' }}
+            > Registrar orina
+            </motion.button>
           </form>
         )}
       </Formik>

@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import '../Table/table.css';
+import { motion } from "framer-motion"
+import '../Table/table.css'
 
 export const ItemAltura = (props) => {
 
@@ -24,7 +25,15 @@ export const ItemAltura = (props) => {
                     <td data-label="Fecha">{ date }</td>
                     <td data-label="Hora">{ time }</td>
                     <td data-label="Altura">{ size }</td>
-                    <td data-label="Borrar"><button onClick={ () => handleDelete(id) }>{ iconDelete }</button></td>
+                    <td data-label="Borrar">
+                        <motion.button
+                            onClick={ () => handleDelete(id) }
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                        >   
+                            { iconDelete }
+                        </motion.button>
+                    </td>
                 </tr>
             </tbody>
         </>

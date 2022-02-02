@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBaby } from '@fortawesome/free-solid-svg-icons';
 import { TablePeso } from '../../components/Table/TablePeso';
 import { generateUUID } from '../../utils/utils';
+import { motion } from "framer-motion";
 import '../../App.css';
 
 const Peso = (props) => {
@@ -96,7 +97,7 @@ const Peso = (props) => {
             <div id="radio-tit">Peso</div>
             <label id="weight-peso" htmlFor="peso" className='col-xs-12 col-s-12'>
               { weight === 1 ? `${ weight } Kg` : `${ weight } Kgs` }
-              <input type="range" name="peso" min="1" max="12" step="0.10" onChange={handleChange} value={weight.toString()} id="weight-input" className="col-xs-12 col-s-12"  /> 
+              <input type="range" name="peso" min="1" max="12" step="0.10" onChange={handleChange} value={weight.toString()} id="weight-input"  /> 
             </label>
 
             {  
@@ -107,9 +108,15 @@ const Peso = (props) => {
               
           </div>
             
-          <button type="submit" className="button-register" onClick={handleSubmit} disabled={isSubmitting}>
-            Registrar Peso
-          </button>
+          <motion.button
+              type="submit" 
+              className="button-register"
+              onClick={handleSubmit}
+              disabled={isSubmitting}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9, backgroundColor: '#00B98E' }}
+            > Registrar peso
+            </motion.button>
         </form>
 
         <TablePeso peso={pesos} handleDelete={handleDelete} />

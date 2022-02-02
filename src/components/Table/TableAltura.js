@@ -1,14 +1,34 @@
 import { ItemAltura } from '../Items/ItemAltura';
+import { motion } from "framer-motion";
 import './table.css';
 
 
 export const TableAltura = (props) => {
 
   const { alturas, handleDelete } = props
+
+  const cardVariants = {
+    offscreen: {
+      y: 300
+    },
+    onscreen: {
+      y: 5,
+      transition: {
+        type: "spring",
+        bounce: 0.4,
+        duration: 0.9
+      }
+    }
+  }
   
   return (
     <div className="wrap-table">
-      <table>
+      <motion.table
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ once: true }}
+        variants={cardVariants}
+      >
         <caption>Historial</caption>
           {
             alturas ? alturas.map((altura, index) => {
@@ -22,8 +42,8 @@ export const TableAltura = (props) => {
             })
           :
             <tbody></tbody>
-          }  
-      </table>
+          } 
+        </motion.table>
     </div>
   )
 }
