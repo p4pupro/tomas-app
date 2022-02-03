@@ -42,6 +42,7 @@ export const Tomas = (props) => {
       return tomaList;
     }, [db]);
 
+ 
     /**
     * Calculate average of tits
     * @returns averageTits
@@ -140,8 +141,6 @@ export const Tomas = (props) => {
   }
 
  
-
-  
 return (
     <>
           <Formik

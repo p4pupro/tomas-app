@@ -9,7 +9,7 @@ const Table = (props) => {
 
   const cardVariants = {
     offscreen: {
-      y: 150
+      y: 100
     },
     onscreen: {
       y: 5,

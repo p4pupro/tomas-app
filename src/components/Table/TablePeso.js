@@ -9,7 +9,7 @@ export const TablePeso = (props) => {
 
   const cardVariants = {
     offscreen: {
-      y: 300
+      y: 100
     },
     onscreen: {
       y: 5,
