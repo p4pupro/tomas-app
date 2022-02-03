@@ -135,7 +135,7 @@ const Pis = (props) => {
               className="button-register"
               disabled={isSubmitting}
               whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9, backgroundColor: '#00B98E' }}
+              whileTap={{ scale: 0.9 }}
             > Registrar orina
             </motion.button>
           </form>

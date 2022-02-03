@@ -142,7 +142,7 @@ import '../../App.css';
               className="button-register" 
               disabled={isSubmitting}
               whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9, backgroundColor: '#00B98E' }}
+              whileTap={{ scale: 0.9 }}
             > Registrar caca
             </motion.button>
           </form>

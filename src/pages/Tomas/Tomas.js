@@ -214,7 +214,7 @@ return (
               className="button-register"
               disabled={isSubmitting}
               whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9, backgroundColor: '#00B98E' }}
+              whileTap={{ scale: 0.9 }}
             >  {isTomaActive ? 'Finalizar Toma' : 'Iniciar Toma'}
             </motion.button>
           </form>
