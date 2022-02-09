@@ -1,12 +1,13 @@
 import './header.css';
 import { NavLink } from '../NavLink/NavLink';
 import { motion } from "framer-motion";
+import logo from '../../assets/logo512.png';
 
 export const Header = () => {
 
     return (
         <div className="header">
-            <h1 className="header-title">Baby Dan</h1>
+            <h1 className="header-title">Baby Dan <img src={logo} alt='Dan' width={44} height={44} style={{ borderRadius: 20, marginTop: 30}} /></h1> 
             <div className="header-buttons-container">
                 <motion.div
                     className="header-button"

@@ -29,7 +29,7 @@ export const TableAltura = (props) => {
         viewport={{ once: true }}
         variants={cardVariants}
       >
-        <caption>Historial</caption>
+        <caption className="table-title">Historial</caption>
           {
             alturas ? alturas.map((altura, index) => {
               return (

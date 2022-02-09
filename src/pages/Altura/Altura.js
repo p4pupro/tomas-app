@@ -96,11 +96,12 @@ const Altura = (props) => {
           <form>
           
             <div className="col-s-12 col-xs-12" style={{ width: '100%' }} role="group" aria-labelledby="radio-tit">
-              <div id="radio-tit">Altura</div>
-              <label id="weight-peso" htmlFor="altura" className='col-xs-12 col-s-12'>
-               { size } Cms
+              <h1 id="radio-tit">Altura</h1>
+              <label id="weight-peso" htmlFor="altura">
+                { size } Cms
+               </label> 
                 <input type="range" name="altura" min="40" max="90" step="1" onChange={handleChange} value={size.toString()} id="weight-input"   /> 
-              </label> 
+              
               
               {  
                 <div className='space'>
@@ -116,7 +117,7 @@ const Altura = (props) => {
               disabled={isSubmitting}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-            > Registrar Altura
+            > Registrar
             </motion.button>
              
           </form>

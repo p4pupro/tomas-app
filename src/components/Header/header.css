@@ -1,7 +1,10 @@
 .header {
     background-color: #00B98E;
     color: #ffffff;
-    padding: 15px;
+}
+
+a {
+    font-size: 16px;
 }
 
 .header-title {
@@ -12,17 +15,22 @@
 
 .header-buttons-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .header-button {  
     color: #ffffff;
+    display: flex;
     background-color: #0E2E50;
     padding: 5px;
-    width: 60px;
-    border-radius: 5px;
-    margin: 5px;
+    width: 80px;
+    height: 50px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #00B98E;
     cursor: pointer;
+    align-items: center;
+    justify-content: center;
     text-align: center;
 }
 

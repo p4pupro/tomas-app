@@ -26,7 +26,8 @@ html {
 }
 
 .space {
-  padding-top: 15px;
+  margin-top: 40px;
+  margin-bottom: 20px;
   display: inline-flex;
   align-content: center;
   justify-content: center;
@@ -114,21 +115,20 @@ html {
 .button-register {
   width: 100%;
   background-color: #00B98E;
-  border-radius: 8px;
   border-style: none;
   box-sizing: border-box;
   color: #FFFFFF;
   cursor: pointer;
   display: inline-block;
   font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  height: 40px;
+  font-size: 1.5em;
+  font-weight: bold;
+  height: 60px;
   line-height: 20px;
   list-style: none;
   margin: 0;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 60px;
   outline: none;
   position: relative;
   text-align: center;
@@ -145,36 +145,36 @@ html {
   display: inline-block;
 }
 
-#radio-tit {
-  margin-top: 20px;
-}
 
 .button-register:hover,
 .button-register:focus {
   background-color: #00B98E;
 }
 
+.turn-tit {
+  margin-bottom: 20px;
+}
+
 
 input[type="radio"] {
- padding: 30px;
- justify-content: space-between;
- transition: all 0.15s ease-out 0s;
- background: white;
- border: none;
- cursor: pointer;
- margin: 20px;
- border-radius: 50%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  transition: all 0.15s ease-out 0s;
+  width: 44px;
+  height: 44px;
+  background-clip: content-box;
+  background-color: #ffdfb0;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
-input[type="radio"]::before {
-  color: #00B98E;
-  width: 0.65em;
-  height: 0.65em;
-  border-radius: 50%;
-  margin: 40px;
+input[type="radio"]:checked {
+  border: 10px solid #ffdfb0;
+  background-color: #ea8868;
   transition: 120ms transform ease-in-out;
-  box-shadow: inset 1em 1em var(--form-control-color);
 }
+
 
 .inputs {
   text-align: left;
@@ -201,13 +201,38 @@ input::placeholder {
 
 
 label {
-  width: 50%;
-  min-height: 100px;
-  max-height: 100px;
   text-align: center;
+  display:flex;
+  flex-direction:column;
+  margin: 10px 0 10px 0;
+}
+
+.radio-btns {
   display: flex;
-  align-content: center;
-  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.radio-columns {
+  display: flex;
+  flex-direction: column;
+}
+
+.tomas-title {
+  margin-bottom: 20px;
+}
+
+.table-title {
+  display: block;
+  font-size: 2em;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
 }
 
 #weight-peso {
@@ -215,7 +240,7 @@ label {
   display: flex;
   align-content: center;
   justify-content: center;
-  
+  padding-bottom: 10px;
 }
 
 #weight-input {
@@ -239,23 +264,23 @@ input[type=range]::-webkit-slider-runnable-track {
   cursor: pointer;
   animate: 0.2s;
   box-shadow: 0px 0px 0px #000000;
-  background: #00B98E;
+  background: #ffdfb0;
   border-radius: 13px;
   border: 0px solid #000000;
 }
 input[type=range]::-webkit-slider-thumb {
   box-shadow: 0px 0px 3px #000000;
-  border: 1px solid #00B98E;
+  border: 1px solid #ea8868;
   height: 22px;
   width: 22px;
   border-radius: 29px;
-  background: #0E2E50;
+  background: #ea8868;
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -2px;
 }
 input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #00B98E;
+  background: #ffdfb0;
 }
 input[type=range]::-moz-range-track {
   width: 100%;
@@ -263,13 +288,13 @@ input[type=range]::-moz-range-track {
   cursor: pointer;
   animate: 0.2s;
   box-shadow: 0px 0px 0px #000000;
-  background: #00B98E;
+  background: #ffdfb0;
   border-radius: 13px;
   border: 0px solid #000000;
 }
 input[type=range]::-moz-range-thumb {
   box-shadow: 0px 0px 3px #000000;
-  border: 1px solid #00B98E;
+  border: 1px solid #ea8868;
   height: 22px;
   width: 22px;
   border-radius: 29px;
@@ -286,13 +311,13 @@ input[type=range]::-ms-track {
   color: transparent;
 }
 input[type=range]::-ms-fill-lower {
-  background: #00B98E;
+  background: #ffdfb0;
   border: 0px solid #000000;
   border-radius: 26px;
   box-shadow: 0px 0px 0px #000000;
 }
 input[type=range]::-ms-fill-upper {
-  background: #00B98E;
+  background: #ffdfb0;
   border: 0px solid #000000;
   border-radius: 26px;
   box-shadow: 0px 0px 0px #000000;
@@ -300,7 +325,7 @@ input[type=range]::-ms-fill-upper {
 input[type=range]::-ms-thumb {
   margin-top: 1px;
   box-shadow: 0px 0px 3px #000000;
-  border: 1px solid #00B98E;
+  border: 1px solid #ea8868;
   height: 22px;
   width: 22px;
   border-radius: 29px;
@@ -308,10 +333,10 @@ input[type=range]::-ms-thumb {
   cursor: pointer;
 }
 input[type=range]:focus::-ms-fill-lower {
-  background: #00B98E;
+  background: #ffdfb0;
 }
 input[type=range]:focus::-ms-fill-upper {
-  background: #00B98E;
+  background: #ffdfb0;
 }
 
 

@@ -93,12 +93,13 @@ const Peso = (props) => {
     return (
       <>
         <form>   
-          <div className="col-s-12 col-xs-12" style={{ width: '100%' }} role="group" aria-labelledby="radio-tit">
-            <div id="radio-tit">Peso</div>
-            <label id="weight-peso" htmlFor="peso" className='col-xs-12 col-s-12'>
+          
+            <h1>Peso</h1>
+            <label id="weight-peso" htmlFor="peso">
               { weight === 1 ? `${ weight } Kg` : `${ weight } Kgs` }
-              <input type="range" name="peso" min="1" max="12" step="0.10" onChange={handleChange} value={weight.toString()} id="weight-input"  /> 
             </label>
+              <input type="range" name="peso" min="1" max="12" step="0.10" onChange={handleChange} value={weight.toString()} id="weight-input"  /> 
+            
 
             {  
               <div className='space'>
@@ -106,7 +107,7 @@ const Peso = (props) => {
               </div>
             }  
               
-          </div>
+         
             
           <motion.button
               type="submit" 
@@ -115,7 +116,7 @@ const Peso = (props) => {
               disabled={isSubmitting}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-            > Registrar peso
+            > Registrar
             </motion.button>
         </form>
 

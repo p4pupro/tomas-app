@@ -29,7 +29,7 @@ export const TablePis = (props) => {
         viewport={{ once: true }}
         variants={cardVariants}
       >
-        <caption>Historial</caption>
+        <caption className="table-title">Historial</caption>
           {
             pis ? pis.map((pi, index) => {
               return (

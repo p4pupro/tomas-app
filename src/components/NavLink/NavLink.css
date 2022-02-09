@@ -1,6 +1,7 @@
 .is-active {
     pointer-events: none;
     font-weight: bold;
+    font-size: 18px;
     color: #00B98E;
 }
 

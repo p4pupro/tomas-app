@@ -29,7 +29,7 @@ export const TablePeso = (props) => {
         viewport={{ once: true }}
         variants={cardVariants}
       >
-        <caption>Historial</caption>
+        <caption className="table-title">Historial</caption>
           {
             peso ? peso.map((pes, index) => {
               return (

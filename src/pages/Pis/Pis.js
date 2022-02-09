@@ -113,18 +113,19 @@ const Pis = (props) => {
           }) => (
           <form onSubmit={handleSubmit}>
           
-            <div className="col-s-12 col-xs-12" style={{ width: '100%' }} role="group" aria-labelledby="radio-tit">
-              <div id="radio-tit">Orina</div>
-              <label htmlFor="amount" className='col-xs-12 col-s-6'>
-                Poco
-                <Field type="radio" name="amount" value="poco" className="col-xs-6 col-s-6 pis"  /> 
-              </label>      
-              <label htmlFor="amount" className='col-xs-12 col-s-6'>
-                Mucho
-                <Field type="radio" name="amount" value="mucho" className="col-xs-6 col-s-6 pis" />
-              </label>
-              
-            </div>
+            <h1 className='tomas-title'>Pis</h1> 
+            <span className='radio-btns'>
+              <label htmlFor="amount">
+              Poco
+                
+                <Field type="radio" name="amount" value="poco"/>
+                </label>
+              <label htmlFor="amount">
+              Mucho 
+                
+                <Field type="radio" name="amount" value="mucho"/> 
+                </label>
+            </span >
 
               {errors.amount && (
                 <span className="error">{errors.amount}</span>
@@ -136,7 +137,7 @@ const Pis = (props) => {
               disabled={isSubmitting}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-            > Registrar orina
+            > Registrar
             </motion.button>
           </form>
         )}

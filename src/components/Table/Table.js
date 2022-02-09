@@ -29,7 +29,7 @@ const Table = (props) => {
         viewport={{ once: true }}
         variants={cardVariants}
       >
-        <caption>Historial</caption>
+        <caption className="table-title">Historial</caption>
           {
             tomas ? tomas.map((toma, index) => {
               return (

@@ -168,24 +168,11 @@ return (
           <form onSubmit={handleSubmit}>
            
             <div className="col-s-12 col-xs-12" style={{ width: '100%'}} role="group" aria-labelledby="radio-tit">
-            <div id="radio-tit">Pecho</div>      
-              <label htmlFor="tit" className='col-xs-12 col-s-6'>
-              Izquierdo 
-              <Field type="radio" name="tit" value="izquierdo" className="col-xs-6 col-s-6" />
-             
-              </label>
-              <label htmlFor="tit" className='col-xs-12 col-s-6'>
-              Derecho 
-              <Field type="radio" name="tit" value="derecho" className="col-xs-6 col-s-6"  /> 
-             </label>
-
-            <div>
-              { tomaTime && (<span className='timer'>{ tomaTime }</span>) } 
-            </div>
+            <h1 className='tomas-title'>Pecho</h1> 
 
             { !isTomaActive && (
               iconRemeber,
-                <div className='col-xs-12 col-s-12'>
+                <div className='col-xs-12 col-s-12 turn-tit'>
                   <span>
                     El último pecho fue 
                     <b className='error'>{ ` ${capitalize(lastTit)} ` } </b> 
@@ -194,7 +181,23 @@ return (
               </div>
               )
             }
-            
+            <span className='radio-btns'>
+              <label htmlFor="tit">
+                Izquierdo
+                
+                <Field type="radio" name="tit" value="izquierdo"/>
+                </label>
+              <label htmlFor="tit">
+                Derecho 
+                
+                <Field type="radio" name="tit" value="derecho"/> 
+                </label>
+            </span >
+
+            <div>
+              { tomaTime && (<span className='timer'>{ tomaTime }</span>) } 
+            </div>
+
 
             { isTomaActive && ( 
                 <div className='space'>
@@ -214,7 +217,7 @@ return (
               disabled={isSubmitting}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-            >  {isTomaActive ? 'Finalizar Toma' : 'Iniciar Toma'}
+            >  {isTomaActive ? 'Finalizar' : 'Empezar'}
             </motion.button>
           </form>
         )}
